@@ -1,0 +1,4 @@
+<!--pages/red_packet/red_packet.wxml-->
+<view animation="{{ animationData }}">
+<text >pages//red_packet.wxml</text>
+</view>

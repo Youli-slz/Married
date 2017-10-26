@@ -1,0 +1,9 @@
+<view class="reflect">
+    <view class="img"><image src="../../assets/image/money1.png"></image></view>
+    <view class="words">钱包余额</view>
+    <view  class="balance">￥857.00</view>
+    <view class="btn">
+       <view class="btn_text"><text>提现</text></view>
+    </view>
+    <view class="notice">钱包余额可提现到微信</view>
+</view>v

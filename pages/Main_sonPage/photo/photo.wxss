@@ -1,0 +1,71 @@
+.Photo{
+    margin-left: 15rpx;
+    margin-right: 15rpx;
+}
+.photo_list{
+    /* margin-top:64rpx; */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* justify-content: space-around; */
+    /* align-content: space-between; */
+}
+
+.add_image{
+    width: 33%;
+    text-align: center;
+}
+
+.add_image image{
+    width: 220rpx;
+    height: 340rpx;
+    margin-bottom: 10rpx;
+}
+
+.add_image video{
+    width: 220rpx;
+    height: 340rpx;
+    margin-bottom: 10rpx;
+}
+
+
+.delet_btn{
+    margin-top:5rpx;
+    height: 64rpx;
+}
+.delet_btn image{
+    margin-right: 10rpx;
+    width: 30rpx;
+    height: 32rpx;
+}
+.btn_select{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: #ff1c63;
+    margin-right: 15rpx;
+}
+.select_delete_btn{
+    position: relative;
+    bottom:360rpx;
+    left:92rpx;
+    height: 1rpx;
+    z-index: 1000;
+}
+.select_delete_btn image {
+    width: 32rpx;
+    height: 32rpx;
+}
+
+.delete_button{
+    position: fixed;
+    bottom: 0rpx;
+    width: 100%;
+    height: 100rpx;
+    background-color: #fff;
+    color: #ff1c63;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}

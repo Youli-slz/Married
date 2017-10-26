@@ -1,0 +1,67 @@
+
+.create_form{
+    border-top: 2rpx solid #f0eff5;
+    /* background-color:#fff; */
+}
+.form_col{
+    display: flex;
+    align-items: center;
+    margin: 0 40rpx;
+    padding-top: 24rpx;
+    padding-bottom: 24rpx;
+}
+.line_com{
+    border-bottom:#e7e7e7 1rpx solid;
+    margin-left: 40rpx;
+}
+.form_col_image{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 40rpx;
+    padding-top: 24rpx;
+    padding-bottom: 15rpx;
+}
+.form_col text {
+    padding-right: 20rpx;
+}
+.col_title{
+    width: 19%;
+    color: #1e1e1e;
+    font-size: 28rpx;
+}
+.col_input{
+    width: 82%;
+}
+#text{
+    width: 100%;
+}
+
+.input_font {
+    text-align: end;
+    font-size: 26rpx;
+    color:#c7c7cd;
+}
+
+.col_Image image{
+    width: 30rpx;
+    height: 30rpx;
+    margin-left: 20rpx;
+}
+
+.col_cover image{
+    width: 90rpx;
+    height:90rpx;
+    border-radius: 50%;
+}
+.Cover_Image{
+    display: flex;
+    align-items: center;
+}
+.set_bride {
+    background-color: #fff;
+    margin-bottom: 20rpx;
+}
+.set_groom{
+    background-color: #fff;
+}

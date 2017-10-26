@@ -1,0 +1,81 @@
+<view class="Mywedding">
+    <view class="Wed_Info" style="height: {{ windowHeight*0.25 }}rpx;">
+      <view class="Info_desc">
+        <view><text style="font-size: 30rpx; color: #4f4f4f">{{ wedding_time }}</text></view>
+        <view class="Address" bindtap="toMap">     <!-- 可跳到地图页-->
+            <view class="addressImg"> 
+                <image src="../../assets/image/location.png"></image>
+            </view>
+            <view class="">
+                <text style="font-size: 28rpx;color: #333333">{{ site }}</text>
+            </view>
+        </view>
+      </view>
+      <view class="setUp" bindtap="TosetPage">
+        <image src="../../assets/image/set.png"></image>
+      </view>
+    </view>
+    <view class="Wed_Oper" style="height: {{ windowHeight*0.063}}px;">
+        <view class='' style="border-right: 2rpx solid #fff;height: 30rpx;"></view>
+        <view class="Operate" bindtap="toCardPage">
+            <image  class="Operate_Card" src="../../assets/image/card.png"></image>
+            <text>请帖</text>
+        </view>
+        <view class='line_com'></view>
+        <view class="Operate" bindtap="toPhoto">
+            <image  class="Operate_Pic" src="../../assets/image/pic.png"></image>
+            <text>相册</text>
+        </view>
+        <view class='line_com' wx:if="{{ user_role != '5' }}"></view>
+        <view class="Operate" wx:if="{{ user_role != '5' }}" bindtap="toGuest">
+            <image  class="Operate_Guests" src="../../assets/image/guests.png"></image>
+            <text>宾客</text>
+        </view>
+        <view class='line_com'></view>
+        <view class="Operate" bindtap="toBalance">
+            <image  class="Operate_Money" src="../../assets/image/money.png"></image>
+            <text>礼金</text>
+        </view>
+        <view class='' style="border-right: 2rpx solid #fff;height: 30rpx;"></view>
+    </view>
+    <view class="Wed_Image" style="width:{{ winWidth }}px; height: {{ winHeight }}px;">
+        <view class="lunbo">
+            <view  class="box" bindtouchstart="touchstart" bindtouchmove="touchmove" bindtouchend="touchend">
+
+                <view class="club" animation="{{animation2}}" bindtap="scrollLeft" style="transform: scale(1,1) translateX({{winWidth}}rpx);">
+                <image src="{{clubs[0]}}" mode="aspectFill"/>
+                </view>
+                <view class="club" animation="{{animation3}}" data-url="{{clubs[1]}}" bindtap="preview">
+                <image src="{{clubs[1]}}" mode="aspectFill"/>
+                </view>                
+                <view class="club" animation="{{animation4}}" bindtap="scrollRight">
+                <image src="{{clubs[2]}}" mode="aspectFill"/>
+                </view>
+            </view>
+        </view>
+        <view class="DANMAKU_Switch" >
+            <view class="chat_image" ><image src="../../assets/image/chat.png" wx:if="{{ isDanmaku }}" bindtap="danmakuInput"></image></view>
+            <view class="dan_image" bindtap="openDan" wx:if="{{ !isDanmaku }}"><image src="../../assets/image/dan_C.png"></image></view>
+            <view class="dan_image" bindtap="openDan" wx:else><image src="../../assets/image/dan_P.png"></image></view>
+        </view>
+        <!--<view class="DANMAKU_Switch2" wx:if="{{ isDanmaku }}">
+            <view class="chat_image" ><image src="../../assets/image/chat.png"></image></view>        
+        </view>-->
+        <view class="input_box"  wx:if="{{danmaku_input}}"><input confirm-type="send" focus="true" cursor-spacing="10" placeholder="一起聊一聊..."  placeholder-class="boot_input_style" value="{{bind_shootValue}}" bindblur="bind_shoot"  bindconfirm="sendDanmaku" /></view>
+    </view>
+    <view class="Wed_button" style="height:{{ windowHeight*0.11}}px;">
+        <view class="btn_to_locale">
+            进入现场
+        </view>        
+    </view>
+    <!--弹幕-->
+    <view class="page" wx:if="{{isDanmaku}}">
+        <view class="doommview" style="{{ windowHeight*0.482}}px; bottom:{{ windowHeight*0.454}}rpx;">
+            <block wx:for="{{doommData}}" wx:key="id">
+                <view wx:if="{{item.display}}" class="aon" style="animation: first {{item.time}}s linear forwards;">
+                    <image src="../../assets/image/touxiang.jpg"></image>{{item.text}}
+                </view>
+            </block>
+        </view>
+    </view>
+</view>

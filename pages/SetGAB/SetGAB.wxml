@@ -1,0 +1,32 @@
+<view class="create">
+        <view class="create_form">
+        <view class="set_bride">
+            <view class="form_col_image" bindtap="choosebrideImage">
+                <view class="col_title"><text>新娘头像</text></view>
+                <view class="Cover_Image">
+                    <view class="col_cover" wx:if="{{ bride_avater }}"><image src="{{ bride_avater }}"></image></view>
+                    <view class="col_Image"  name="image"><image src="../../assets/image/next.png"></image></view>
+                </view>
+            </view>
+            <view class="line_com"></view>
+            <view class="form_col">
+                <view class="col_title"><text>新娘</text></view>
+                <view class="col_input"  name="Bride"><input type="text" name="Bride" style="text-align:right;" id="text" placeholder="请输入新娘名字" placeholder-class="input_font" bindinput="getBirdeName"></input></view>
+            </view>
+        </view>
+        <view class="set_groom">
+            <view class="form_col_image" bindtap="choosegroomImage">
+                <view class="col_title"><text>新郎头像</text></view>
+                <view class="Cover_Image">
+                    <view class="col_cover" wx:if="{{ groom_avater }}"><image src="{{ groom_avater }}"></image></view>
+                    <view class="col_Image"  name="image"><image src="../../assets/image/next.png"></image></view>
+                </view>
+            </view>
+            <view class="line_com"></view>
+            <view class="form_col">
+                <view class="col_title"><text>新郎</text></view>
+                <view class="col_input"><input type="text" name="Groom" style="text-align:right;" id="text" placeholder="请输入新郎名字" placeholder-class="input_font" bindinput="getGroomName"></input></view>
+            </view>
+        </view>
+        </view>
+</view>

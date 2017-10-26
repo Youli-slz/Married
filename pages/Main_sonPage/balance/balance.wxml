@@ -1,0 +1,31 @@
+<view class="balance">
+    <view class="notice">
+        礼金金额将全部转入您的结婚了账户余额中，您可以前往<text>个人中心-钱包-余额</text>内提现或充值。
+    </view>
+    <view class="showMoney">
+        <view class="title"><text>您总计收到礼金</text></view>
+        <view class="money"><text>￥0.00</text></view>
+    </view>
+    <view class="empty" wx:if="{{ !MoneyList.length }}">
+        <view class="empty_text"><text>您还未收到礼金~</text></view>
+        <view class="empty_btn">去发请帖</view>
+    </view>
+    <view class="moneylist" wx:else>
+    <block wx:for="{{ MoneyList }}" wx:key="{{ index }}">
+      <view class="line_info">
+        <view class="line_image"><image src="../../../assets/image/default_people.png"></image></view>
+        <view class="info">
+            <view class="info_ND">
+                <view class="name">{{item.nick}}</view>
+                <view class="date">{{item.time}}</view>
+            </view>
+            <view class="words">{{item.words}}</view>  
+        </view>
+        <view class="cash">
+            <text>￥{{ item.money }}</text>
+        </view>
+      </view> 
+      <view class="line_con" wx:if="{{ index < MoneyList.length-1 }}"></view>
+    </block>
+    </view>
+</view>

@@ -1,0 +1,138 @@
+.myCard {
+    display: flex;
+    justify-content: space-between;
+    /* align-content: center; */
+    align-items: center;
+    height: 114rpx;
+    background-color: #fff;
+    margin-top: 1rpx;
+    padding: 0 40rpx;
+}
+
+.Card_title {
+    display: flex;
+    align-items: center;  
+}
+
+.Card_title image{
+    width: 32rpx;
+    height: 33rpx;
+    padding-right: 10rpx;
+}
+
+.toAdd image{
+    width: 30rpx;
+    height: 30rpx;
+}
+
+ .Card{
+     width: 100%;
+     height: 360rpx;
+} 
+.Card image{ 
+     width: 100%; 
+      height: 360rpx;  
+}
+.Mask{
+    position: absolute;
+    margin-top: 100rpx;
+    text-align: center;
+    width: 100%;
+    height:180rpx;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Card_my {
+     width: 100%;
+     height: 300rpx;
+}
+
+.Card_my image{
+    width: 100%;
+    height: 300rpx;
+}
+
+.CountDown{
+    height: 60rpx;
+    width: 100%;
+    background-color: #fff;
+    text-align: center;
+    margin-bottom: 10rpx;
+}
+
+.Mask_my{
+    position: absolute;
+    margin-left: 30rpx;
+    width: 100rpx;
+    height:300rpx;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+     /* justify-content: space-between;  */
+     justify-content: space-around; 
+}
+
+.Mask .Name{
+    margin-top: 5rpx;
+    margin-bottom: 10rpx;
+}
+
+.Mask_attend{
+    height: 100rpx;
+    text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Mask_conent{
+    margin-top: 7rpx;
+}
+
+.getCard .myCard{
+    margin-top: 20rpx;
+}
+.Address{
+    display: flex;
+    align-items: center;
+    padding:0 40rpx;
+    height: 140rpx;
+    background-color: #fff;
+    margin-bottom: 15rpx;
+}
+
+.Address image{
+    width: 35rpx;
+    height: 41rpx;
+    margin-right: 20rpx;
+}
+
+.addressImg {
+    display: flex;
+    align-items: center;
+}
+
+.status_attend{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position:absolute;
+    right:30rpx;
+    margin-top: 20rpx;
+    width: 110rpx;
+    height: 50rpx;
+    /* background-color: #0262cf; */
+    border-radius: 10rpx;
+    color: #fff;
+}
+
+.line_com {
+    height: 1px;
+    background: #fff;
+    width: 80rpx;
+}
+

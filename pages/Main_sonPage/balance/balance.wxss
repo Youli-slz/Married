@@ -1,0 +1,111 @@
+/* pages/Main_sonPage/balance/balance.wxss */
+.notice{
+    padding-top: 20rpx;
+    padding-left: 46rpx;
+    padding-right: 46rpx;
+    color: #666666;
+    font-size: 26rpx;
+    height: 100rpx;
+    background-color: #fff;
+}
+.notice text{
+    color: #ff1c63;
+}
+
+.showMoney{
+    height: 300rpx;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #ff1c63;
+}
+
+.title text{
+    color: #fff;
+    font-size: 40rpx;
+}
+.money text{
+    color: #fff;
+    font-size: 40rpx;
+}
+.empty{
+    display: flex;
+     flex-direction: column; 
+    text-align: center;
+    justify-content: center;
+}
+.empty_text{
+     margin-top: 178rpx; 
+    color: #ababab;
+    font-size: 36rpx;
+}
+.empty_btn{
+    margin-top: 178rpx;
+    margin-left: 200rpx;
+    width: 350rpx;
+    height: 80rpx;
+    background-color: #ff1c63;
+    color: #fff;
+    font-size: 36rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50rpx;
+}
+.line_info{
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    /* background-color: #fff; */
+}
+.line_info image{
+    width: 100rpx;
+    height: 100rpx;
+}
+.line_image {
+    display: flex;
+    align-items: center;
+}
+
+.moneylist{
+    margin-top: 20rpx;
+     padding-top: 20rpx; 
+    padding-bottom: 20rpx;
+    padding-left: 30rpx;
+    background-color: #fff;
+}
+.info_ND{
+    display: flex;
+}
+.info_ND .name{
+    color: #1e1e1e;
+    font-size: 28rpx;
+    padding-right: 10rpx;
+}
+.info_ND .date{
+    color: #c1c1c1;
+    font-size: 20rpx;
+    display: flex;
+    align-items: center;
+}
+
+.words{
+    font-size: 28rpx;
+    color: #585858;
+}
+.info{
+    padding-left: 30rpx;
+    width: 50%;
+}
+
+.cash{
+    padding-left: 30rpx;
+    color: #ff1c63;
+    font-size: 30rpx;
+}
+.line_con{
+    border-bottom: 1rpx solid #e7e7e7;
+    margin-top: 20rpx;
+    margin-bottom: 20rpx;
+}

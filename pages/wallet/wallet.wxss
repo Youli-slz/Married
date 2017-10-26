@@ -1,0 +1,153 @@
+/* pages/wallet/wallet.wxss */
+.title{
+    background-color: #555962;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 250rpx;
+    width: 100%;
+}
+.title_info{
+    margin-left: 40rpx;
+}
+.title_words{
+    font-size: 28rpx;
+    color: #fff;
+}
+.title_balance{
+    font-size:40rpx;
+    color: #fff;
+    display: flex;
+    align-items: center;
+}
+.title_balance text{
+    font-size: 90rpx;
+}
+.title_next {
+    margin-right: 40rpx;
+    display: flex;
+    align-items: center;
+}
+.title_next image{
+    width: 21rpx;
+    height: 38rpx;
+}
+
+.PayIncome_info{
+    height: 94rpx;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.reward, .recharge{
+    color: #484848;
+}
+.line_con{
+    border-left: 1rpx solid #fff;
+}
+.line_center{
+    height: 60rpx;
+    width: 1rpx;
+    border-left: 4rpx solid #e0e0e0;
+}
+
+.PayIncome_info{
+    margin-bottom: 20rpx;
+}
+
+.detail_btn{
+    background-color: #fff;
+    height: 94rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.detail_img{
+    display: flex;
+    align-items: center;
+}
+.detail_img image{
+    width: 27rpx;
+    height: 15rpx;
+}
+.detail_title{
+    margin-left: 40rpx;
+}
+.detail_img{
+    margin-right: 30rpx;
+}
+
+.rotateRight{
+    animation: first 0.3s ;
+    transform: rotate(180deg);
+}
+.rotateLeft{
+    animation: two 0.3s;
+    transform: rotate(0deg);
+}
+/* .rotateRight{ */
+    @keyframes first{
+        0%{
+            transform: rotate(0deg)
+        }
+        100%{
+            transform: rotate(-180deg);
+        }
+    }
+    @keyframes two{
+        0%{
+            transform: rotate(-180deg)
+        }
+        100%{
+            transform: rotate(0deg);
+        }
+    }
+    /*180度旋转*/
+/* } */
+
+.detail_list{
+    background-color: #fff;
+    border-top: 1rpx solid #e0e0e0;
+}
+.list_info{
+    border-bottom: 1rpx solid #e0e0e0;
+    height: 128rpx;
+    display: flex;
+    align-items: center;
+    margin-left: 40rpx;
+}
+
+.list_img_money{
+    width: 15%;
+    display: flex;
+    align-items: center;
+}
+.list_img_money image{
+    width: 75rpx;
+    height: 78rpx;
+}
+
+.list_img_red{
+    width: 15%;
+    display: flex;
+    align-items: center;
+}
+.list_img_red image{
+    width: 69rpx;
+    height: 79rpx;
+}
+
+.cash_list_info .words{
+   overflow: hidden;   /* 超出一行自动隐藏  */
+   text-overflow: ellipsis; /* 文字隐藏后添加省略号  */
+   white-space: nowrap;  /*强制不换行*/   
+}
+.cash_list_info{
+    width: 60%;
+}
+.cash_list_money{
+    font-size: 34rpx;
+    color: #ff1c63;
+    padding-left: 10rpx;
+}

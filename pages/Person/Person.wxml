@@ -1,0 +1,26 @@
+<view class="person">
+    <view class="title_img">
+        <image src="../../assets/image/person_title.jpg"></image>
+    </view>
+    <view class="avatarUrl">
+        <image src="{{avatarUrl}}"></image>
+    </view>
+    <view class="nick_name">{{nickname}}</view>
+    <view class="person_info">
+        <view class="line_info">
+            <view class="">姓名</view>
+            <view class="">{{Name}}</view>
+        </view>
+        <view class="line_con"></view>
+        <view class="line_info">
+            <view class="">手机</view>
+            <view class="">{{Phone}}</view>
+        </view>
+    </view>
+    <view class="wallet">
+        <view class="line_info" bindtap="toWallet">
+            <view class="line_info_img"><image src="../../assets/image/wallet.png"></image>钱包</view>
+            <view class="line_next"><image src="../../assets/image/next.png"></image></view>
+        </view>
+    </view>
+</view>

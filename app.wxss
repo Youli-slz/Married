@@ -1,0 +1,12 @@
+/**app.wxss**/
+/* @import "./zanui-dist/index.wxss"; */
+@import 'static/weui.wxss';
+@import 'components/wux.wxss';
+@import 'assets/styles/wxui.wxss';
+@import 'assets/styles/mainview.wxss';
+
+.container {
+  /* height: 100%; */
+  /* display: flex; */
+  margin: 0 20rpx;
+} 

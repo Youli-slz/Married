@@ -1,0 +1,155 @@
+<import src="../../components/wxSortPickerView/wxSortPickerView.wxml"/> 
+
+<view class="header">
+    <view class="header_title">
+        <view>司仪： XXX</view>
+        <view>婚庆: xxxxx传媒公司</view>
+    </view>
+    <image src="../../assets/image/scene/scene_03.png" bindtap="ShowGuest"></image>
+</view>
+<view class="chat_Box" bindtap="hidden_fun_box">
+    <scroll-view scroll-y style="height:{{winHeight}}px;">
+        <view class="other">
+            <view class="chat_desc">
+                <view class="avater">
+                    <image src="../../assets/image/touxiang.jpg"></image>
+                </view>
+                <view class="info">
+                    <view class="name">张志明</view>
+                    <view class="content">
+                        新婚快乐！早略带科技浪费开始就了会计法离开势均力敌看风景老师肯定积分了看似简单了开发就老师肯定积分了看时间发生贵子！
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="line_com"></view>
+        <view class="other">
+            <view class="chat_desc">
+                <view class="avater">
+                    <image src="../../assets/image/touxiang.jpg"></image>
+                </view>
+                <view class="info">
+                    <view class="name">张志明</view>
+                    <view class="content">
+                        新婚快乐！生贵子！
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="line_com"></view>
+        <view class="me">
+            <view class="chat_desc">
+                <view class="info">
+                    <view class="name">张志明</view>
+                    <view class="content">
+                        新婚快乐大姐夫是林德洛夫离开束带结发看到蓝思科技了看时间发开始多浪费卡聚少离多看风景索拉卡的缴费索拉卡的就发！生贵子！
+                    </view>
+                </view>
+                <view class="avater">
+                    <image src="../../assets/image/touxiang.jpg"></image>
+                </view>
+            </view>
+        </view>
+        <view class="line_com"></view>
+        <view class="me">
+            <view class="chat_desc">
+                <view class="info">
+                    <view class="name">张志明</view>
+                    <view class="content">
+                        <image src="../../assets/image/1.jpg" mode="aspectFill"></image>
+                        <image src="../../assets/image/2.jpg" mode="aspectFill"></image>
+                    </view>
+                </view>
+                <view class="avater">
+                    <image src="../../assets/image/touxiang.jpg"></image>
+                </view>
+            </view>
+        </view>
+        <view class="line_com"></view>
+        <view class="other">
+            <view class="chat_desc">
+                <view class="avater">
+                    <image src="../../assets/image/touxiang.jpg"></image>
+                </view>
+                <view class="info">
+                    <view class="name">张志明</view>
+                    <view class="content">
+                        <image src="../../assets/image/1.jpg" mode="aspectFill"></image>
+                        <image src="../../assets/image/2.jpg" mode="aspectFill"></image>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="line_com"></view>
+        <view class="system_msg">
+            <view class="sys_content">
+                <image src="../../assets/image/scene/scene_23.png"></image>
+                胡歌领取了你的<text>红包</text>
+            </view>
+        </view>
+        <view class="line_com"></view>
+        <view class="other">
+            <view class="chat_desc">
+                <view class="avater">
+                    <image src="../../assets/image/touxiang.jpg"></image>
+                </view>
+                <view class="info">
+                    <view class="name">张志明</view>
+                    <view class="content">
+                        <button bindtap="toplay">播放录音</button>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="line_com"></view>
+    </scroll-view>
+</view>
+<view class="bottom_box">
+    <view class="foot">
+        <view style="width:1rpx;height:98rpx;"></view>
+        <view class="voice_image" bindtap="Tape">
+            <image src="../../assets/image/scene/scene_27.png" hidden="{{istape}}"></image>
+            <image src="../../assets/image/scene/keyboard.png" hidden="{{!istape}}"></image>
+        </view>
+        <view class="foot_input" wx:if="{{!istape}}"><input placeholder="一起聊一聊..." placeholder-class="input_style"/></view>
+        <view class="foot_tape" wx:if="{{istape}}"><button bindtouchstart="touchdown" bindtouchend="touchup">按住 说话</button></view>
+        <view class="foot_more" bindtap="showMore">
+            <image src="../../assets/image/scene/scene_30.png"></image>
+        </view>
+        <view style="width:1rpx;height:98rpx;"></view>
+    </view>
+    <view class="More" wx:if="{{isFunction}}" style="height:{{windowHeight * 0.2}}px;">
+        <view style="width:1rpx;height:98rpx;"></view>
+        <view class="function"><image src="../../assets/image/scene/scene_35.png"></image><text>相册</text></view>
+        <view class="function"><image src="../../assets/image/scene/scene_37.png"></image><text>祝福</text></view>
+        <view class="function"><image src="../../assets/image/scene/scene_39.png"></image><text>红包</text></view>
+        <view class="function"><image src="../../assets/image/scene/scene_41.png"></image><text>游戏</text></view>
+        <view style="width:1rpx;height:98rpx;"></view>
+    </view>
+</view>
+
+<!--模态背景-->
+<view class="right_lan" wx:if="{{showList}}" bindtap="ShowGuest">
+</view>
+
+<!--右侧滑出的宾客列表-->
+<view class="guestList rightcome" wx:if="{{showList}}">
+<scroll-view scroll-y style="height:{{windowHeight}}px;">
+    <view class="admin_title">新人、管理员 （{{admin_list.length}}）</view>
+    <view class="adminList">
+    <block wx:for="{{ admin_list }}" wx:key="{{ index }}">
+        <view class="guest_line">
+            <view class="line_type">
+                <view class="line_type_role" wx:if="{{item.user_status == 2}}">新郎</view>
+                <view class="line_type_role" wx:if="{{item.user_status == 3}}">新娘</view>
+                <view class="line_type_role" wx:if="{{item.user_status == 4}}">管理员</view>
+            </view>
+            <view class="line_image"><image src="../../../assets/image/default_people.png"></image></view>
+            <view class="line_name">{{item.name}}</view>
+        </view>
+        <view wx:if="{{ index < admin_list.length-1 }}" class="line_con"></view>
+    </block>
+    </view>
+    <template is="wxSortPickerView" data="{{wxSortPickerData}}"/>    
+</scroll-view>
+</view>

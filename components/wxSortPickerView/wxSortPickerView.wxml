@@ -1,0 +1,26 @@
+
+<template name="wxSortPickerView">
+    <scroll-view class="wxSortPickerViewList" scroll-y="true"  bindscrolltoupper="wxSortPickerViewUpper" bindscrolltolower="wxSortPickerViewLower" bindscroll="wxSortPickerViewScroll" scroll-into-view="{{wxSortPickerData.wxSortPickerViewtoView}}" scroll-top="{{wxSortPickerData.wxSortPickerViewScrollTop}}">
+    <!--<view animation="{{wxSortPickerData.animationData}}" class="wxSortPickerViewList">-->
+        <!--<view class="wxSortPickerViewTag wxSortPickerViewFixedTag">{{wxSortPickerData.nowTag}}</view>-->
+        <block wx:for="{{wxSortPickerData.textData}}" wx:for-item="item" wx:key="">
+            <view id="{{item.tag}}" class="wxSortPickerViewTag" wx:if="{{item.textArray.length != 0}}">{{item.tag}}</view>
+            <template is="wxSortPickerViewItem" data="{{item,RoleType}}" wx:if="{{item.textArray.length != 0}}"/>
+        </block>
+    <!--</view>-->
+    </scroll-view>
+
+</template>
+
+<template name="wxSortPickerViewItem">
+    <view class="guest_list_info">
+        <view wx:for="{{item.textArray}}" wx:for-item="child" wx:key="{{index}}">
+                <view class="guest_line">
+                    <view class="line_image"><image src="../../../assets/image/default_people.png"></image></view>
+                    <view class="line_name">{{child.nick_name}}</view>
+                    <view wx:if="{{RoleType}}"><picker bindchange="changeRole" data-id="{{child.id}}" value="{{index}}" range="{{RoleType}}" range-key="name"><view class="line_edit"><image src="../../../assets/image/edit.png"></image></view></picker></view>
+                </view>
+                <view wx:if="{{ index < item.textArray.length-1 }}" class="line_con"></view>        
+            </view>
+    </view>
+</template>

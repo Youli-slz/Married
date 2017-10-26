@@ -1,0 +1,70 @@
+.wxSortPickerViewTemTags{
+  position: fixed;
+  top: 10px;
+  right: 0;
+  background-color: #fff;
+  color: cornflowerblue;
+}
+.wxSortPickerViewTemTag{
+  text-align: center;
+  padding: 3px;
+  font-size: 12px;
+}
+.wxSortPickerViewFixedTag{
+  position: fixed;
+  width: 100%;
+}
+
+.wxSortPickerViewTag{
+  font-size: 14px;
+  height: 40rpx;
+  line-height: 40rpx; 
+  padding: 0 30rpx;
+  background-color: #f0eff5;
+}
+
+.wxSortPickerViewItem{
+  height: 40px;
+  line-height: 40px;
+  border-bottom: 1px solid #eee;
+  margin-left: 5px;
+}
+.guest_line{
+    /* padding-left: 40rpx; */
+
+    display: flex;
+    align-items: center;
+}
+.line_edit{
+    display: flex;
+    align-items: center;
+    width: 50%;
+    justify-content: flex-end;
+    position: absolute;
+    right: 20rpx;
+}
+.line_image{
+    display: flex;
+    align-items: center;
+    padding-right: 30rpx;
+}
+.line_image image{
+    width: 100rpx;
+    height: 100rpx;
+}
+.line_edit image{
+    width: 30rpx;
+    height: 30rpx;
+    padding-right: 20rpx;
+}
+
+.line_con{
+    border-bottom: 1rpx solid #e7e7e7;
+    margin-top: 15rpx;
+    margin-bottom: 15rpx;
+}
+
+.list_title{
+    height:40rpx;
+    padding-left:30rpx;
+}

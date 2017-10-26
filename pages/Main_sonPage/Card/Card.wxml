@@ -1,0 +1,10 @@
+<view class="Card">
+    <view class="css_line"></view>
+    <view class="Card_empty" wx:if="{{ !Card_list }}">
+        <image src="../../../assets/image/inv_03.png"></image>
+        <view class="empty_text"><text>还未创建请帖哦~</text></view>
+    </view>
+    <view class="create_btn" bindtap="Create_card">
+        <text>创 建 请 帖</text>
+    </view>
+</view>

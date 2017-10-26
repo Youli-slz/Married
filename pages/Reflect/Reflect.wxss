@@ -1,0 +1,51 @@
+/* pages/Reflect/Reflect.wxss */
+.reflect{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.img{
+    margin-top: 70rpx;
+    text-align: center;
+}
+.img image{
+    width: 165rpx;
+    height: 172rpx;
+}
+.words{
+    margin-top:40rpx;
+    text-align: center;
+    font-size: 32rpx;
+    color: #1e1e1e;
+}
+.balance{
+    text-align: center;
+    margin-top: 70rpx;
+    font-size:50rpx;
+}
+
+.btn{
+    margin-top: 40rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn_text{
+    width: 600rpx;
+    height: 90rpx;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8rpx;
+    border: 1rpx solid #e0e0e0;
+}
+.btn_text text{
+    font-size: 32rpx;
+}
+.notice{
+    text-align: center;
+    margin-top: 40rpx;
+    font-size: 28rpx;
+    color: #7f7e7e;
+}

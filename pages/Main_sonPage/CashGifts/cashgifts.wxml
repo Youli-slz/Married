@@ -1,0 +1,55 @@
+<view class="cashgifts" wx:if="{{ISSEND}}">
+    <view class="cash_info">
+    <view class="user_img"><image src="../../../assets/image/default_people.png"></image></view>
+    <view class="input_box">
+     <view class="input_line">
+        <text>金额</text>
+        <input type="digit" placeholder-style="font-size: 34rpx;color:#8d8d8d;text-align:end;" placeholder="0.00" value="{{InputValue}}" style="margin-left:60rpx;text-align:right;margin-right:10rpx;" bindinput="getmoney" /> 
+        <view class="yuan">元</view>  
+     </view>
+     <view class="words">
+       <textarea placeholder-style="font-size: 34rpx; color: #8d8d8d;" placeholder="新婚快乐!"/>
+     </view>
+    </view>
+    </view>
+    <view class="showMoney">
+        <text>￥</text><view class="money">{{CASH}}</view>
+    </view>
+    <view class="btn_cash">
+        <view class="btn" wx:if="{{CASH != '0.00' && CASH != ''}}" bindtap="sendCash">
+            <view class="btn_words">发送礼金</view>
+        </view>
+        <view class="btn_1" wx:else>
+            <view class="btn_words">发送礼金</view>
+        </view>
+    </view>
+</view>
+ 
+<view class="cashgiftsList" wx:if="{{!ISSEND}}">
+  <view class="cash_info">
+    <view class="user_img">
+       <image src="../../../assets/image/default_people.png"></image>
+    </view>
+    <view class="cashList">
+        <view class="CL">
+            <view class="cash_sum">
+                <view class="">您已发送礼金总金额: </view>
+                <view class="money">￥990.00</view>
+            </view>
+            <view class="list_info">
+                <view class="list_img"><image src="../../../assets/image/m_list.png"></image></view>
+                <view class="cash_list_info">
+                    <view class="words">新婚快乐!</view>
+                    <view class="time">12月23日 21:12</view>
+                </view>
+                <view class="cash_list_money">￥990.00</view>
+            </view>
+        </view>
+    </view>
+  </view>
+    <view class="btn_cash">
+        <view class="btn" bindtap="TosendCash">
+            <view class="btn_words">发送礼金</view>
+        </view>
+    </view>
+</view>

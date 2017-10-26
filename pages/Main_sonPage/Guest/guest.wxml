@@ -1,0 +1,41 @@
+<import src="../../../components/wxSortPickerView/wxSortPickerView.wxml"/> 
+<view class="guest">
+    <view class="search">
+        <view class="search_image"><image src="../../../assets/image/search.png"></image></view>
+        <view class="search_input"><input type="text" confirm-type="search" placeholder="搜索"  bindconfirm="searchGuest"/></view>
+    </view>
+    <view class="statistics" bindtap="toStatistic">
+        <view class="stat_image"><image src="../../../assets/image/tongji.png"></image></view>
+        <view class="stat">宾客统计</view>
+    </view>
+    <view class="adminList">
+    <block wx:for="{{ admin_list }}" wx:key="{{ index }}">
+        <view class="guest_line">
+            <view class="line_type">
+                <view class="line_type_role" wx:if="{{item.user_status == 1}}">创始人</view>
+                <view class="line_type_role" wx:if="{{item.user_status == 2}}">新郎</view>
+                <view class="line_type_role" wx:if="{{item.user_status == 3}}">新娘</view>
+                <view class="line_type_role" wx:if="{{item.user_status == 4}}">管理员</view>
+            </view>
+            <view class="line_image"><image src="../../../assets/image/default_people.png"></image></view>
+            <view class="line_name">{{item.nick_name}}</view>
+            <picker bindchange="changeRole" data-id="{{item.id}}" value="{{index}}" range="{{RoleType}}" range-key="name"><view class="line_edit"><image src="../../../assets/image/edit.png"></image></view></picker>
+        </view>
+        <view wx:if="{{ index < admin_list.length-1 }}" class="line_con"></view>
+    </block>
+    </view>
+    <!--<view wx:for="{{ zimu_list }}" wx:key="{{item.type}}" >
+        <view class="list_title">{{item.type}}</view>
+        <view class="guest_list_info" >
+        <view wx:for="{{ item.value }}" wx:key="{{ index }}" wx:for-item="test" >
+            <view class="guest_line">
+                <view class="line_image"><image src="../../../assets/image/default_people.png"></image></view>
+                <view class="line_name">{{test.name}}</view>
+                <picker bindchange="changeRole" data-index="{{itme.id}}" value="{{index}}" range="{{RoleType}}"><view class="line_edit"><image src="../../../assets/image/edit.png"></image></view></picker>
+            </view>
+            <view wx:if="{{ index < item.value.length-1 }}" class="line_con"></view>
+        </view>
+        </view>
+    </view>-->
+    <template is="wxSortPickerView" data="{{wxSortPickerData,RoleType}}"/>
+</view> 

@@ -1,0 +1,8 @@
+@import './style/common.wxss';
+@import './style/animate.wxss';
+
+@import './style/Dialog.wxss';
+@import './style/Toast.wxss';
+@import './style/hover_btn.wxss';
+@import './style/picker_city.wxss';
+@import './style/toptips.wxss';

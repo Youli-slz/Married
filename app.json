@@ -1,0 +1,55 @@
+{
+  "pages": [
+    "pages/Scene/Scene",
+    "pages/index/index",
+    "pages/Te/te",
+    "pages/user/user",
+    "pages/red_packet/red_packet",
+    "pages/createWedding/Create",
+    "pages/Main/Main",
+    "pages/Set/Set",
+    "pages/SetGAB/SetGAB",
+    "pages/Main_sonPage/Card/Card",
+    "pages/Main_sonPage/photo/photo",
+    "pages/Main_sonPage/balance/balance",
+    "pages/Main_sonPage/Guest/guest",
+    "pages/Main_sonPage/statistic_guest/statistic_guest",
+    "pages/Main_sonPage/CashGifts/cashgifts",
+    "pages/Person/Person",
+    "pages/wallet/wallet",
+    "pages/Reflect/Reflect",
+    "pages/Main_sonPage/format/formatList"
+
+
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "婚礼宝",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#ff1c63",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/Scene/Scene",
+        "text": "测试"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "./assets/image/index_tab.png",
+        "selectedIconPath": "./assets/image/index_tab_selected.png",
+        "text": "婚礼助手"
+      },
+      {
+        "pagePath": "pages/Person/Person",
+        "iconPath": "assets/image/Person_tab.png",
+        "selectedIconPath": "assets/image/Person_tab_selected.png",
+        "text": "个人中心"
+      }
+    ]
+  }
+}

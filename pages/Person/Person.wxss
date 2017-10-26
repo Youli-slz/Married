@@ -1,0 +1,60 @@
+/* pages/Person/Person.wxss */
+.title_img image{
+    width: 100%;
+    height: 240rpx;
+}
+.title_img{
+    height: 240rpx;
+}
+.avatarUrl{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.avatarUrl image{
+    width: 190rpx;
+    height: 190rpx;
+    border-radius: 50%;
+    border: 6rpx solid #f0eff5;
+    position: absolute;
+    top:154rpx;
+}
+
+.nick_name{
+    width: 100%;
+    text-align: center;
+    font-size: 30rpx;
+    color: #1e1e1e;
+    margin-top: 130rpx;
+    margin-bottom: 30rpx;
+}
+.person_info,.wallet{
+    background-color: #fff;
+    margin-bottom: 20rpx;
+    padding-left:40rpx;
+}
+.line_info{
+    padding-top: 20rpx;
+    padding-bottom:20rpx;
+    padding-right: 30rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.line_con{
+    width: 100%;
+    border-bottom: 1rpx solid #f0eff5;
+}
+.line_info_img{
+    display: flex;
+    align-items: center;
+    padding-right: 20rpx;
+}
+.line_info_img image{
+    width: 38rpx;
+    height: 28rpx;
+}
+.line_next image{
+    width: 32rpx;
+    height: 32rpx;
+}
