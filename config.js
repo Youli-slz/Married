@@ -3,8 +3,8 @@
  */
 
 // 此处主机域名修改成腾讯云解决方案分配的域名
-var host = '47602916.qcloud.la/wafer';              //  阿里云 wxapi.duobb.cn/wafer        // 腾讯云 47602916.qcloud.la
-var Rhost = '47602916.qcloud.la';              // 只用作普通请求
+var host = 'access.djtaoke.cn/wafer';              //  阿里云 wxapi.duobb.cn/wafer        // 腾讯云 47602916.qcloud.la
+var Rhost = 'access.djtaoke.cn';              // 只用作普通请求
 
 var config = {
 
@@ -26,8 +26,14 @@ var config = {
      * 请求头带的参数之一
     */
     header: {
-        AppId: 'wxf4d6959f359f26ad'             // 每个项目都有一个AppId
+      AppId: 'wxb2de1aacb42e47df'             // 每个项目都有一个AppId
+    },
+    
+    Type:{
+        ProtocolType: "wss"             // wss: websocket协议    https: https协议
     }
 };
+
+//调用协议种类 https 、 wss
 
 module.exports = config;

@@ -1,7 +1,9 @@
-var sq = require('../../utils/sRequest.js');
-// var login = require('../../utils/login.js');
+
+var constants = require('../../static/ProtocolType.js');
+var controller = require('../../utils/controller_onec.js');
 var app = getApp();
 var TIME = null;
+var countdown_time;
 
 Page({
 
@@ -9,7 +11,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    other_count: null,
+    other_count: 0,
     my_invitation: [],
     other_invitation: [],
     hSwiperVar: {},
@@ -21,8 +23,8 @@ Page({
   */
   toMap: function (e) {
     wx.openLocation({
-      latitude: parseInt(e.currentTarget.dataset.latitude),
-      longitude: parseInt(e.currentTarget.dataset.longitude),
+      latitude: parseFloat(e.currentTarget.dataset.latitude),
+      longitude: parseFloat(e.currentTarget.dataset.longitude),
       scale: 18
     })
   },
@@ -30,49 +32,58 @@ Page({
   //获取我的婚礼列表
   getMywedding: function () {
     var that = this;
-    // try{
-    //   var userid=wx.getStorageSync('USER_INFO');
-    // } catch(e){
-
-    // }
-    sq.POST({
-      url: '/socket/response.do',
-      servername: "logic",
-      params: {
-        action_name: "get_invitation_list",
-        data: {
+    wx.showLoading({
+      title: '加载中...',
+      // mask: true
+    })
+    controller.REQUEST({
+      servername: constants.CONTANT_SERVER_NAME,
+      methodname: constants.GET_INVITATION_LIST,
+      data:{
+        action_name: 'get_invitation_list',
+        data:{
           user_id: app.globalData.userInfo.id,
-        }
-      },
-      success: function (res) {
-        that.setData({
-          my_invitation: res.my_invitation,
-          other_invitation: res.other_invitation.list,
-          other_count: res.other_invitation.count,
-        })
-
-        //暂时关闭倒计时
-        for(var i = 0;  i < res.my_invitation.length; i++) {
-            that.countdown(res.my_invitation[i].time, i);
         }
       }
     })
   },
 
+  getInvitationList: function (data) {
+    var that = this;
+    wx.hideLoading();
+    console.log(data.other_invitation.list)
+    for(var i = 0; i< data.other_invitation.count; i++){
+      data.other_invitation.list[i].site = JSON.parse(data.other_invitation.list[i].site)
+      console.log(data.other_invitation.list[i].site);
+    }
+    that.setData({
+      my_invitation: data.my_invitation,
+      other_invitation: data.other_invitation.list,
+      other_count: data.other_invitation.count
+    })
+    for(var i = 0; i< data.my_invitation.length; i++){
+      console.log('shijain')
+      that.countdown(data.my_invitation[i].time, i);
+    }
+  },
+
+
+
   /**
    * 跳转到主页面
   */
   toMain: function (e) {
-    wx.setStorage({
-      key: 'USER_ROLE_WEDDING',
-      data: e.currentTarget.dataset.user_status,
-    })
+    // wx.setStorage({
+    //   key: 'USER_ROLE_WEDDING',
+    //   data: e.currentTarget.dataset.user_status,
+    // })
     wx.navigateTo({
       url: '../Main/Main?wedding_id=' + e.currentTarget.dataset.card_id
       + '&wedding_time=' + e.currentTarget.dataset.wedding_time
       + '&site=' + e.currentTarget.dataset.site
       + '&latitude=' + e.currentTarget.dataset.latitude
-      + '&longitude=' + e.currentTarget.dataset.longitude,
+      + '&longitude=' + e.currentTarget.dataset.longitude
+      + '&user_status=' + e.currentTarget.dataset.user_status,
     })
   },
 
@@ -102,9 +113,9 @@ Page({
       var string = "my_invitation[" + index + "].time"
       param[string] = "已截止"
       that.setData(param);
-      //return;
+      return ;
     }
-    setTimeout(function () {
+    countdown_time = setTimeout(function () {
       total_micro_second -= 1000;
       that.countdown(time, index);
     }
@@ -129,7 +140,6 @@ Page({
 
   //检测是否有userid
   getid: function (){
-    // console.log(app.globalData.userInfo.id)
     var that = this;
     if(app.globalData.userInfo == null){
       TIME= setTimeout(function () {
@@ -137,15 +147,32 @@ Page({
       },1000);
     } else {
       clearTimeout(TIME);
+
       that.getMywedding();
     }
   },
+
+    getdata: function (server, method,  data) {
+     var that = this;
+     if(typeof server == 'string'){
+      if(method == constants.GET_INVITATION_LIST){
+        that.getInvitationList(JSON.parse(data).data);
+      }
+     } else {
+       console.log(server)
+     }
+  },
+
+    initPage: function () {
+      var that = this;
+      that.getid();
+    },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getid()
+
   },
 
   /**
@@ -153,12 +180,16 @@ Page({
    */
   onReady: function () {
     // this.getMywedding();
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    console.log('show')
+    // socket.initnetwork(this.getdata,);
+    controller.init( this.initPage,this.getdata, );
     this.getid()
   },
 
@@ -166,14 +197,19 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    for(var i= 0 ; i < this.data.my_invitation.length; i++){
+      console.log(countdown_time)
+      clearTimeout(countdown_time);
+    }
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    for(var i= 0 ; i < this.data.my_invitation.length; i++){
+      clearTimeout(countdown_time);
+    }
   },
 
   /**
@@ -197,48 +233,3 @@ Page({
 
   }
 })
-
-
-
-
-
-
-/**
- * 婚礼日期倒计时方法
-*/
-// function countdown(that) {
-//  var EndTime = that.data.end_time || [];           // 这里的时间是时间戳
-//  var NowTime = new Date().getTime();
-//  var total_micro_second = EndTime - NowTime || [];
-//  console.log('剩余时间：' + total_micro_second);
-//   // 渲染倒计时时钟
-//   that.setData({
-//   clock: dateformat(total_micro_second)
-//   });
-//   if (total_micro_second <= 0) {
-//   that.setData({
-//    clock: "已经截止"
-//   });
-//   //return;
-//   }
-//   setTimeout(function () {
-//   total_micro_second -= 1000;
-//   countdown(that);
-//   }
-//   , 1000)
-//  }
-
-//  // 时间格式化输出，如11:03 25:19 每1s都会调用一次
-//  function dateformat(micro_second) {
-//   // 总秒数
-//   var second = Math.floor(micro_second / 1000);
-//   // 天数
-//   var day = Math.floor(second/3600/24);
-//   // 小时
-//   var hr = Math.floor(second/3600%24);
-//   // 分钟
-//   var min = Math.floor(second/60%60);
-//   // 秒
-//   var sec = Math.floor(second%60);
-//   return day + "天" + hr + "小时" + min + "分钟" + sec+"秒";
-//  }

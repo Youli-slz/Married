@@ -1,0 +1,55 @@
+.time_title{
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10rpx;
+    height: 100rpx;
+}
+.title{
+    color: #1e1e1e;
+    font-size:32rpx;
+    padding-left: 40rpx;
+}
+.time{
+    padding-right: 40rpx;
+    font-size: 32rpx;
+    color: #7e7e7e;
+}
+.balance{
+    height: 100rpx;
+    display: flex;
+    align-items: center;
+    color: #7e7e7e;
+    font-size: 28rpx;
+    padding-left: 40rpx;
+}
+
+.money{
+    height: 100rpx;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+}
+.money input{
+    margin-left: 20rpx;
+}
+
+.confirm_btn{
+    margin-top: 200rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn{
+    width: 600rpx;
+    height: 90rpx;
+    background-color: #ff1c63;
+    border-radius: 10rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn text{
+    color: #fff;
+}

@@ -29,12 +29,12 @@
 }
 
 
-.delet_btn{
+/* .delet_btn{
     margin-top:5rpx;
     height: 64rpx;
-}
+} */
 .delet_btn image{
-    margin-right: 10rpx;
+    margin-right: 16rpx;
     width: 30rpx;
     height: 32rpx;
 }
@@ -44,6 +44,8 @@
     justify-content: flex-end;
     color: #ff1c63;
     margin-right: 15rpx;
+    height:80rpx;
+    font-size:34rpx;
 }
 .select_delete_btn{
     position: relative;
@@ -52,6 +54,15 @@
     height: 1rpx;
     z-index: 1000;
 }
+
+.befsave_delete_btn{
+    position: relative;
+    bottom:364rpx;
+    left:88rpx;
+    height: 1rpx;
+    z-index: 1000;
+}
+
 .select_delete_btn image {
     width: 32rpx;
     height: 32rpx;

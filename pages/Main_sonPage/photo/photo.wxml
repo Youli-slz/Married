@@ -1,26 +1,28 @@
 <view class="Photo">
-    <view class="delet_btn" bindtap="changeDelect" wx:if="{{ !ischange }}">
-        <view class="btn_select" wx:if="{{ !isdelect }}"><image src="../../../assets/image/delet.png"></image>选择</view>
-        <view class="btn_select" wx:else>取消</view>
+    <view class="delet_btn"  wx:if="{{ !ischange }}">
+        <view class="btn_select" wx:if="{{ !isdelect }}"><view style="display: flex;align-items: center;" bindtap="changeDelect"><image src="http://7xld1x.com1.z0.glb.clouddn.com/delet.png"></image>选择</view></view>
+        <view class="btn_select" wx:else bindtap="changeDelect">取消</view>
     </view>
     <view class="" wx:else>
-        <view class="btn_select" bindtap="saveImage">保存</view>
+        <view class="btn_select" bindtap="saveImage"><image src="../../../assets/image/save.png" style="width:36rpx;height:32rpx;margin-right:16rpx;"></image>保存</view>
     </view> 
     <view class="photo_list">
 
         <view class="add_image" > <!--bindtap="Add"-->
         <picker bindchange="bindPickerChange" value="{{index}}" range="{{chooseMethod}}">
-            <image src="../../../assets/image/add_photo.png"></image>
+            <image src="http://7xld1x.com1.z0.glb.clouddn.com/add_photo.png"></image>
         </picker>    
         </view>
         <block wx:for="{{ photoList }}" wx:key="{{ index }}">
-            <view class="add_image" wx:if="{{ item.type == '1' }}" bindtap="select" data-index="{{index}}" data-id="{{ item.id}}">
+            <view class="add_image" wx:if="{{ item.type == '1' }}" bindtap="{{item.id?'select':''}}" data-index="{{index}}" data-id="{{ item.id}}">
                 <view class="" bindtap="preview" data-url="{{ item.url }}"><image src="{{ item.url }}" mode="aspectFill"></image></view>
-                <view class="select_delete_btn" wx:if="{{ isdelect }}"><image src="../../../assets/image/select_delet_{{item.Num}}.png" ></image></view>
+                <view class="select_delete_btn" wx:if="{{ isdelect }}"><image src="http://7xld1x.com1.z0.glb.clouddn.com/select_delet_{{item.Num}}.png" ></image></view>
+                <view class="befsave_delete_btn" wx:if="{{!item.id}}" bindtap="delbeforesave" data-index="{{index}}"><image src="http://7xld1x.com1.z0.glb.clouddn.com/del_03.png" style="width: 44rpx;height:44rpx;"></image></view>
             </view>
-            <view class="add_image" wx:else bindtap="select" data-index="{{index}}" data-id="{{ item.id}}">
+            <view class="add_image" wx:else bindtap="{{item.id?'select':''}}" data-index="{{index}}" data-id="{{item.id}}">
                 <view class=""><video id="myvideo" src="{{ item.url }}" ></video></view>
-                <view class="select_delete_btn" wx:if="{{ isdelect }}"><image src="../../../assets/image/select_delet_{{item.Num}}.png"></image></view>            
+                <view class="select_delete_btn" wx:if="{{ isdelect }}"><image src="http://7xld1x.com1.z0.glb.clouddn.com/select_delet_{{item.Num}}.png"></image></view>            
+                <view class="befsave_delete_btn" wx:if="{{!item.id}}" bindtap="delbeforesave" data-index="{{index}}"><image src="http://7xld1x.com1.z0.glb.clouddn.com/del_03.png" style="width: 44rpx;height:44rpx;"></image></view>
             </view>
         </block>
     </view>

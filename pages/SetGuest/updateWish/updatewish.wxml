@@ -1,0 +1,13 @@
+<!--<view class="update">
+    <textarea placeholder="请输入你的祝福" placeholder-class="place_style" maxlength="-1" bindconfirm="getwish"/>
+</view>
+  <view class="save_btn" bindtap="savewish">
+    <view>确定</view>
+  </view>-->
+
+<form bindsubmit="getwish">
+    <view class="update">
+      <textarea name="evaContent"  placeholder="请输入你的祝福" value="{{wish}}" placeholder-class="place_style" maxlength="-1" />          
+    </view>  
+      <button formType="submit"  class="save_btn">确定</button>
+ </form>

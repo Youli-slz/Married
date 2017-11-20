@@ -1,4 +1,5 @@
-// pages/Person/Person.js
+var config = require('../../config');
+var qcloud = require('../../static/bower_components/wafer-client-sdk/index');
 var app = getApp();
 
 Page({
@@ -9,8 +10,17 @@ Page({
   data: {
     avatarUrl:'',
     nickname: '',
-    Name: '沈林镇',
-    Phone:'13646870373',
+    Name: '无',
+    Phone:'无',
+  },
+
+  /**
+   * 转到个人中心设置页面
+  */
+  toSet: function () {
+    wx.navigateTo({
+      url: './person_set/person_set?name='+ this.data.Name + '&phone=' + this.data.Phone 
+    })
   },
 
   /**
@@ -22,16 +32,32 @@ Page({
     })
   },
 
+  getserinfo: function () {
+    var that = this;
+    qcloud.request({                                              // 在没有登陆的时候会先请求登陆接口然后调用请求获取用户信息
+      url: config.service.requestUrl,
+      login: true,
+      success(result) {
+        console.log(result.data.data.userInfo);
+        var info = result.data.data.userInfo;
+        that.setData({
+          avatarUrl: info.avatarUrl,
+          nickname: info.nickName,
+          Name: info.name == ''? '暂无' : info.name,
+          Phone: info.phone == ''? '暂无': info.phone
+        })
+      },
+      fail(error) {
+        console.log('request fail', error);
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this;
-     var uInfo = wx.getStorageSync('USER_INFO');
-     that.setData({
-        avatarUrl: uInfo.avatarUrl,
-        nickname: uInfo.nickName,
-     })
+     this.getserinfo();
   },
 
   /**
@@ -45,7 +71,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+      this.getserinfo();
   },
 
   /**

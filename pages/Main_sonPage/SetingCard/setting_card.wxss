@@ -1,0 +1,123 @@
+.g_a_b{
+    width: 100%;
+    border-top: 20rpx solid #f0eff5;
+    background-color: #fff;
+}
+
+.INFO{
+    height:100rpx;
+    margin-left: 20rpx;
+    display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    -o-align-items: center;
+    align-items: center;
+}
+
+.info_title{
+    padding-left: 20rpx;
+    font-size: 28rpx;
+}
+
+.INFO input{
+    padding-right: 20rpx;
+}
+
+.g_a_b .INFO:nth-child(1){
+    border-bottom: 2rpx solid #f0eff5;
+}
+
+.wedding_time{
+    background-color: #fff;
+    width: 100%;
+    border-top: 20rpx solid #f0eff5;
+}
+
+.wedding_time .INFO:nth-child(1){
+    border-bottom: 2rpx solid #f0eff5;
+}
+
+.select image{
+    width: 32rpx;
+    height: 32rpx;
+    padding-right: 20rpx;
+}
+
+.address{
+    display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    -o-align-items: center;
+    align-items: center;
+    background-color: #fff;
+    width: 100%;
+    border-top: 20rpx solid #f0eff5;
+    height: 100rpx;
+    /* padding-left: 20rpx; */
+}
+
+.address .info_title{
+    padding-left: 20rpx;
+    font-size: 28rpx;
+    margin-left:20rpx;
+}
+
+.input_font{
+    font-size: 26rpx;
+}
+
+.location{
+    max-width: 300rpx;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow: ellipsis; 
+    font-size: 26rpx;
+}
+ .select{
+    display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    -o-align-items: center;
+    align-items: center;
+}
+
+canvas{
+    opacity: 1;
+    width: 100%;
+}
+
+.submit_btn{
+    background-color: #ff1c63;
+    color: #fff;
+    width: 100%;
+    height: 100rpx;
+}
+
+.submit{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 100rpx;
+    background-color: #ff1c63;
+    text-align: center;
+    line-height: 100rpx;
+    color: #fff;
+}
+
+.submit_btn{
+    color: #fff;
+}

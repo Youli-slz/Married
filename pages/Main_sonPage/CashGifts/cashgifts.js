@@ -1,6 +1,9 @@
 // pages/Main_sonPage/CashGifts/cashgifts.js
-var sq = require('../../../utils/sRequest.js');
+var constants = require('../../../static/ProtocolType.js')
+// var sq = require('../../../utils/sRequest.js');
+var controller = require('../../../utils/controller_onec.js');
 var app = getApp();
+var readyPay = false;
 
 Page({
 
@@ -8,19 +11,25 @@ Page({
    * 页面的初始数据
    */
   data: {
+    wish: '新婚快乐',
+    Card_id: null,
     winWidth: null,
     winHeight: null,
     CASH: "0.00",
-    ISSEND: true,
+    ISSEND: false,
     InputValue: '',
     Balance: null,
+    readyPay:false,
+    avaterPic: app.globalData.userInfo.avatarUrl,
+    paymethod: ['微信支付', '余额支付'],
+    send_money_count: 0.00,
+    sendList: []
   },
 
   /**
    * 获取用户输入的金额
   */
   getmoney: function (e) {
-    console.log(e)
     var money
     if(e.detail.value == ''){
       money = '0.00';
@@ -32,26 +41,40 @@ Page({
     })
   },
 
+
+
   /**
    * 获取账户余额
   */
   getbalance: function () {
     var that = this;
-    sq.POST({
-      url: '/socket/response.do',
-      servername: ' logic',
-      params:{
+    controller.REQUEST({
+      servername: constants.CONTANT_SERVER_NAME,
+      methodname: constants.GET_BALANCE,
+      data:{
         action_name: 'get_balance',
         data: {
           user_id: app.globalData.userInfo.id,
         }
-      },
-      success: function (res) {
-        that.setData({
-          Balance: res.balance,
-        })
       }
     })
+  },
+
+  /**
+   * 获取账户余额数据
+   */
+  getBalanceData: function (data) {
+    if(data.code == 0){
+      this.setData({
+        Balance: data.data.balance
+      })
+    } else {
+      wx.showToast({
+        title: data.msg,
+        duration: 2000
+      })
+    }
+
   },
 
   /**
@@ -65,38 +88,101 @@ Page({
      })
   },
 
+  bindpay: function (e) {
+    console.log(e.detail.value);
+    var type = e.detail.value;
+    if(type == 0){
+      this.sendCash();
+    } else {
+      this.sendByBalance();
+    }
+  },
+
+  getWish: function (e) {
+    this.setData({
+      wish: e.detail.value
+    })
+  },
+
+  /**
+   * 用余额发礼金
+  */
+  sendByBalance: function () {
+    var that = this;
+    controller.REQUEST({
+      servername: constants.CONTANT_SERVER_NAME,
+      methodname: constants.SEND_CASHGIFT,
+      data:{
+        action_name: 'send_cash_gift',
+        data:{
+          user_id: app.globalData.userInfo.id,
+          wedding_id: that.data.Card_Id,
+          money: that.data.CASH,
+          wish: that.data.wish
+        }
+      }
+    })
+  },
+
+  getsendbybalData: function (data) {
+    if(data.code == 0){
+      wx.showToast({
+        title: '发送成功'
+      })
+    }else {
+      wx.showToast({
+        title: data.msg,
+        image: '../../../assets/image/cuo.png'
+      })
+    }
+  },
+
   /**
    * 发送礼金
   */
   sendCash: function () {
     var that = this;
     console.log(this.data.Balance);
-    if(that.data.CASH > that.data.Balance ){
-      console.log('调用支付接口');
-    sq.POST({
-      url: '/socket/response.do',
-      servername: ' logic',
-      params:{
-        action_name: 'get_pay_params',
-        data: {
-          user_id: app.globalData.userInfo.id,
-          pay_type: 1,                                  // 支付类型固定为1
-          pay_target: 'recharge',
-          money: that.data.CASH,
-        }
-      },
-      success: function (res) {
-        // console.log(res);
-        that.pay(res)
-      }
-    })
+    if(!readyPay){
+      controller.REQUEST({
+        servername: constants.CONTANT_SERVER_NAME,
+        methodname: constants.GET_PAY_PARAMS,
+        data:{
+          action_name: 'get_pay_params',
+          data: {
+            user_id: app.globalData.userInfo.id,
+            pay_type: 1,                                  // 支付类型固定为1
+            pay_target: 'cashGift',
+            data:{
+              card_id: that.data.Card_id,
+              money: that.data.CASH,
+              wish: that.data.wish
+            }
+          }
+        },
+      })
     } else{
-      console.log('从本地余额扣除');
+      return false;
     }
-        // that.setData({
-        //   ISSEND: false,
-        // })
+  },
 
+  /**
+   * 发送礼金后返回的数据
+  */
+  getSendCashData: function (data) {
+    var that = this;
+    if(data.code == 0){
+      if(!readyPay){
+        that.pay(data.data);
+        readyPay = true;
+      }
+    } else {
+      wx.showModal({
+        title: 'error',
+        content: data.msg,
+        confirmText: '确定'
+      })
+    }
   },
 
   /**
@@ -104,6 +190,7 @@ Page({
   */
   pay: function (val){
     var that = this;
+    readyPay = false;
     wx.requestPayment({
       'timeStamp': val.timeStamp,
       'nonceStr': val.nonceStr,
@@ -112,6 +199,9 @@ Page({
       'paySign': val.paySign,
       'success':function(res){
         console.log(res);
+        that.setData({
+          ISSEND: false
+        })
       },
       'fail':function(res){
         console.log(res);
@@ -125,27 +215,38 @@ Page({
   */
   cancelPay: function (val) {
     var that = this;
-    sq.POST({
-      url: '/socket/response.do',
-      servername: ' logic',
-      params:{
+    readyPay = false;
+    controller.REQUEST({
+      servername: constants.CONTANT_SERVER_NAME,
+      methodname: constants.CANCEL_PAY,
+      data:{
         action_name: 'cancel_pay',
         data: {
           bill_no: val,
           pay_type: 1,                                  // 支付类型固定为1
           pay_target: 'cashGift',
         }
-      },
-      success: function (res) {
-        console.log(res);
-        that.setData({
-          CASH: '0.00',
-          InputValue:''
-        })
       }
     })
   },
 
+  /**
+   * 获取取消数据后的数据
+  */
+  getCancelPayData: function (data) {
+    if(data.code == 0){
+      this.setData({
+        CASH: '0.00',
+        InputValue: ''
+      })
+    } else {
+      wx.showToast({
+        title: '取消失败'+ data.msg,
+        duration: 2000
+      })
+    }
+  },
+ 
   /**
    * 获取设备信息
   */
@@ -162,11 +263,120 @@ Page({
   },
 
   /**
+   * 发送的礼金列表
+  */
+  getsendMoneyList: function () {
+    var that = this;
+
+    controller.REQUEST({
+      servername: constants.CONTANT_SERVER_NAME,
+      methodname: constants.SEND_CASHGIFT_LIST,
+      data:{
+        action_name: 'send_cash_gift_list',
+        data:{
+          wedding_id: that.data.Card_Id,
+          user_id: app.globalData.userInfo.id
+        }
+      }
+    })
+  },
+
+  /**
+   * 获取礼金列表数据
+  */
+  getSendMoneyData: function (data) {
+    if(data.code == 0){
+      console.log(data.data);
+      if(data.data.list){
+        console.log(111);
+        for(var i=0; i< data.data.list.length; i++){
+          data.data.list[i].create_at = this.convert_time(data.data.list[i].create_at);
+        }
+      }
+      this.setData({
+        send_money_count: data.data.money_count,
+        sendList: data.data.list
+      })
+    } else {
+      wx.showToast({
+        title: data.msg,
+        image: '../../../assets/image/cuo.png',
+        duration: 2000
+      })
+    }
+  },
+
+  /**
+   * 时间戳转换为时间
+   */
+  convert_time: function (t) {
+    var time;
+    var date = new Date(t*1000);
+    var year = date.getFullYear();
+    var month = this.addZero(date.getMonth() + 1);
+    var day = this.addZero(date.getDate());
+    var hour = this.addZero(date.getHours());
+    var minute = this.addZero(date.getMinutes());
+    time =  month + '月' + day + '日'+ ' ' + hour + ':' + minute;
+
+    return time;
+  },
+
+  addZero: function (temp) {
+    if(temp < 10)
+      return "0"+temp;
+    else 
+      return temp;
+  },
+
+  /**
+   * 从信道获取数据
+  */
+  getdata: function (server, method, data) {
+    var that = this;
+    if(typeof server == 'string'){
+      var ProtocolData = JSON.parse(data);
+      switch (method){
+        case constants.GET_BALANCE:
+          that.getBalanceData(ProtocolData);
+          break;
+        case constants.GET_PAY_PARAMS:
+          that.getSendCashData(ProtocolData);
+          break;
+        case constants.CANCEL_PAY:
+          that.getCancelPayData(ProtocolData);
+          break;
+        case constants.SEND_CASHGIFT:
+          that.getsendbybalData(ProtocolData);
+          break;
+        case constants.SEND_CASHGIFT_LIST:
+          that.getSendMoneyData(ProtocolData);
+          break;
+      }
+    } else {
+      console.log(server);
+    }
+  },
+
+  /**
+   * 创建页面初始化请求
+  */
+  initPage: function () {
+    var that = this;
+    this.getbalance();
+  },
+
+  /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      Card_Id: options.wedding_id,
+    })
     this.getwindowinfo();
     this.getbalance();
+    this.getsendMoneyList();
+    controller.init(this.initPage, this.getdata,);
   },
 
   /**

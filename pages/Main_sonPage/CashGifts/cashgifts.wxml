@@ -1,14 +1,15 @@
-<view class="cashgifts" wx:if="{{ISSEND}}">
-    <view class="cash_info">
-    <view class="user_img"><image src="../../../assets/image/default_people.png"></image></view>
+<view class="cashgifts" wx:if="{{ISSEND}}" style="background-image: url('http://7xld1x.com1.z0.glb.clouddn.com/tmp/wxb2de1aacb42e47df.o6zAJs6e4iQOHuo7DT2vSURT-cTg.1215695961dca878b46208b53996df97.png');">
+    <view class="cash_info">                                             
+    <view class="user_img_show"><image src="{{avaterPic}}"></image></view>
     <view class="input_box">
      <view class="input_line">
         <text>金额</text>
         <input type="digit" placeholder-style="font-size: 34rpx;color:#8d8d8d;text-align:end;" placeholder="0.00" value="{{InputValue}}" style="margin-left:60rpx;text-align:right;margin-right:10rpx;" bindinput="getmoney" /> 
         <view class="yuan">元</view>  
      </view>
-     <view class="words">
-       <textarea placeholder-style="font-size: 34rpx; color: #8d8d8d;" placeholder="新婚快乐!"/>
+     <view class="input_words">
+        <view class="input_title"><text>留言</text></view>
+       <textarea placeholder-style="font-size: 34rpx; color: #8d8d8d;" placeholder="新婚快乐!" bindblur="getWish"/>
      </view>
     </view>
     </view>
@@ -16,8 +17,8 @@
         <text>￥</text><view class="money">{{CASH}}</view>
     </view>
     <view class="btn_cash">
-        <view class="btn" wx:if="{{CASH != '0.00' && CASH != ''}}" bindtap="sendCash">
-            <view class="btn_words">发送礼金</view>
+        <view class="btn" wx:if="{{CASH != '0.00' && CASH != ''}}" >
+          <picker bindchange="bindpay" value="{{index}}" range="{{paymethod}}"><view class="btn_words">发送礼金</view></picker>
         </view>
         <view class="btn_1" wx:else>
             <view class="btn_words">发送礼金</view>
@@ -25,25 +26,35 @@
     </view>
 </view>
  
-<view class="cashgiftsList" wx:if="{{!ISSEND}}">
+<view class="cashgiftsList" wx:if="{{!ISSEND}}" style="background-image: url('http://7xld1x.com1.z0.glb.clouddn.com/tmp/wxb2de1aacb42e47df.o6zAJs6e4iQOHuo7DT2vSURT-cTg.2bc36281f0388e7acb2791389be31174.png');">
   <view class="cash_info">
-    <view class="user_img">
-       <image src="../../../assets/image/default_people.png"></image>
+    <view class="user_img_pay">
+       <image src="{{avaterPic}}"></image>
     </view>
     <view class="cashList">
         <view class="CL">
             <view class="cash_sum">
-                <view class="">您已发送礼金总金额: </view>
-                <view class="money">￥990.00</view>
+                <view class="" style="font-size: 30rpx;color: #1e1e1e;">您已发送礼金总金额: </view>
+                <view class="money">￥{{send_money_count}}</view>
             </view>
-            <view class="list_info">
-                <view class="list_img"><image src="../../../assets/image/m_list.png"></image></view>
+            <!--<view class="list_info">
+                <view class="list_img"><image src="http://7xld1x.com1.z0.glb.clouddn.com/m_list.png"></image></view>
                 <view class="cash_list_info">
                     <view class="words">新婚快乐!</view>
                     <view class="time">12月23日 21:12</view>
                 </view>
                 <view class="cash_list_money">￥990.00</view>
-            </view>
+            </view>-->
+            <block wx:for="{{sendList}}" wx:key="{{index}}">
+                <view class="list_info_send">
+                    <view class="list_img"><image src="http://7xld1x.com1.z0.glb.clouddn.com/m_list.png"></image></view>
+                    <view class="cash_list_info">
+                        <view class="words">{{item.wish}}</view>
+                        <view class="time">{{item.create_at}}</view>
+                    </view>
+                    <view class="cash_list_money">￥{{item.money}}</view>
+                </view>             
+            </block>
         </view>
     </view>
   </view>

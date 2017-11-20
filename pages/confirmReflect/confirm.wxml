@@ -1,0 +1,20 @@
+<view class="reflect">
+    <view class="time_title">
+        <view class="title">到账时间</view>
+        <view class="time">一到两个工作日到账</view>
+    </view>
+    <view class="balance">
+        可转出金额:  {{Balance}}元
+    </view>
+    <view class="money">
+        <view class="title">金额</view>
+        <input type="digit" placeholder="0.00" bindinput="reflectMoney"/>
+    </view>
+    <view style="font-size: 24rpx;color:#7e7e7e; margin-left: 40rpx;">最低提取金额 2元</view>
+
+    <view class="confirm_btn">
+        <view class="btn" bindtap="Rconfirm">
+          <text>确认提现</text>
+        </view>
+    </view>
+</view>

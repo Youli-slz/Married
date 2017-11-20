@@ -2,31 +2,31 @@
         <view class="create_form">
             <view class="newPeople" bindtap="setGroomBride">
                 <view class="newImage">
-                    <view><image src="../../assets/image/default_people.png"></image><view class="newImage_col">马冬梅</view></view>
-                    <view><image src="../../assets/image/default_people.png"></image><view class="newImage_col">夏天</view></view>
+                    <view><image src="{{bride_avater}}"></image><view class="newImage_col">{{bride_name}}</view></view>
+                    <view><image src="{{groom_avater}}"></image><view class="newImage_col">{{groom_name}}</view></view>
                 </view>
                 <view class="next">
-                    <image src="../../assets/image/next.png"></image>
+                    <image src="http://7xld1x.com1.z0.glb.clouddn.com/next.png"></image>
                 </view>
             </view>
             <view class="form_col_image" bindtap="chooseImage">
                 <view class="col_title"><text>封面</text></view>
                 <view class="Cover_Image">
-                    <view class="col_cover" wx:if="{{ cover }}"><image src="{{ cover }}"></image></view>
-                    <view class="col_Image"  name="image"><image src="../../assets/image/next.png"></image></view>
+                    <view class="col_cover" wx:if="{{ cover }}"><image src="{{ cover }}" mode="aspectFill"></image></view>
+                    <view class="col_Image"  name="image"><image src="http://7xld1x.com1.z0.glb.clouddn.com/next.png"></image></view>
                 </view>
             </view>
             <view class="line_com"></view>
             <view class="form_col">
                 <view class="col_title"><text>手机号</text></view>
-                <view class="col_input"><input type="text" name="mobile" style="text-align:right;" id="text" placeholder="请输入手机号" placeholder-class="input_font" bindinput="getmobile"></input></view>
+                <view class="col_input"><input type="text" name="mobile" style="text-align:right;" id="text" placeholder="请输入手机号" placeholder-class="input_font" bindinput="getmobile" value="{{mobile}}"></input></view>
             </view>
             <view class="line_com"  style="border-bottom:#f0eff5 20rpx solid;margin-left:0px;"></view>
             <view class="form_col">
                 <view class="col_title"><text>日期</text></view>
                 <view class="col_input">
-                    <picker mode="date" start="2015-09-01" end="2057-12-31" bindchange="bindDateChange">
-                        <input type="text" name="weddingDate" style="text-align:right;" id="text"  disabled="true" placeholder="请设置婚礼日期" placeholder-class="input_font"value="{{ weddingDate }}" placeholder-style="color:#c7c7cd;"></input>
+                    <picker mode="date" start="2015-09-01" end="2057-12-31" bindchange="bindDateChange" value="{{weddingDate}}">
+                        <input type="text" name="weddingDate" style="text-align:right;" id="text"  disabled="true" placeholder="请设置婚礼日期" placeholder-class="input_font" value="{{ weddingDate }}" placeholder-style="color:#c7c7cd;"></input>
                     </picker>
                 </view>
             </view>
@@ -34,7 +34,7 @@
             <view class="form_col">
                 <view class="col_title"><text>时间</text></view>
                 <view class="col_input">
-                    <picker mode="time" start="00:00" end="24:59" bindchange="bindTimeChange">
+                    <picker mode="time" start="00:00" end="24:59" bindchange="bindTimeChange" value="{{weddingTime}}">
                         <input type="text" name="weddingTime" style="text-align:right;" id="text"  disabled="true" placeholder="请设置婚礼时间" placeholder-class="input_font"value="{{ weddingTime }}" placeholder-style="color:#c7c7cd;"></input>
                     </picker>
                 </view>
@@ -42,7 +42,15 @@
             <view class="line_com" style="border-bottom:#f0eff5 20rpx solid;margin-left:0px;"></view>
             <view class="form_last_col" >
                 <view class="col_title"><text>地址</text></view>
-                <view class="col_input" bindtap="getAddr"><input type="text" name="address" style="text-align:right;" id="text" placeholder="请设置婚礼地址" placeholder-class="input_font" value="{{ address }}" ></input></view>
+                <view class="col_input" bindtap="getAddr"><input type="text" name="address" style="text-align:right;" id="text" placeholder="请设置婚礼地址" placeholder-class="input_font" value="{{ address.name }}" ></input></view>
             </view>
+            <view class="line_com"></view>
+            <view class="form_col">
+                <view class="col_title"><text>宴会厅</text></view>
+                <view class="col_input"><input type="text" name="address" style="text-align:right;" id="text" placeholder="请设置婚礼宴会厅" placeholder-class="input_font" value="{{banquet_hall}}" bindinput="getbanquet_hall" ></input></view>
+            </view>
+        </view>
+        <view class="save_btn" bindtap="saveWeddingInfo">
+            <view>保存</view>
         </view>
 </view>

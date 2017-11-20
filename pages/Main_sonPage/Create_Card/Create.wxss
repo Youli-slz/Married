@@ -1,0 +1,71 @@
+/* pages/Main_sonPage/Create_Card/Create.wxss */
+page{
+    /* display: block; */
+    background-color: #fff;
+}
+
+/* 
+.tem_type{
+    height:86rpx;
+    border-top: 2rpx solid #f0eff5;
+    border-bottom: 2rpx solid #f0eff5;
+}
+.recommend{
+    height: 100%;
+    width: 74rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ff1c63;
+    font-size: 28rpx;
+    margin-left: 56rpx;
+    border-bottom: 4rpx solid #ff1c63;
+}*/
+
+.Card_list{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-left: 32rpx;
+    margin-right: 32rpx;
+    margin-top: 32rpx;
+}
+
+.Card_list image{
+    width: 330rpx;
+    height: 536rpx;
+    border: 2rpx solid #e2e2e2;
+} 
+
+.swiper-tab{ 
+  display: flex;
+  align-items: center;
+  width: 100%; 
+   border-top: 2rpx solid #e7e7e7;  
+  background-color:#fff;
+  text-align: center; 
+  line-height: 88rpx;
+  margin-bottom: 20rpx;
+} 
+.swiper-tab-list{ 
+  font-size: 28rpx; 
+  /* margin: 30rpx 0; */
+  display: inline-block; 
+  width: 33%; 
+  color: #8a8a8a; 
+}
+.line_top{
+    border-left: 2rpx solid #e7e7e7;
+    width: 1rpx;
+    height: 40rpx;
+}
+
+/* .swiper-tab-list:nth-child(2){
+    border-left: 1rpx solid #8a8a8a;
+    border-right: 1rpx solid #8a8a8a;
+} */
+
+.on{ color: #ff1c63; 
+  border-bottom: 5rpx solid #ff1c63;
+} 
+  

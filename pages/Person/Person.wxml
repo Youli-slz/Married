@@ -1,6 +1,6 @@
 <view class="person">
-    <view class="title_img">
-        <image src="../../assets/image/person_title.jpg"></image>
+    <view class="title_img" style="background-image: url('http://7xld1x.com1.z0.glb.clouddn.com/person_title.jpg'); background-size: contain;" >
+        <view class="edit_btn" bindtap="toSet"><image src="http://7xld1x.com1.z0.glb.clouddn.com/tmp/wxb2de1aacb42e47df.o6zAJs6e4iQOHuo7DT2vSURT-cTg.a04361268093510295f684bd307668ec.png" style="width: 42rpx;height: 42rpx;"></image></view>
     </view>
     <view class="avatarUrl">
         <image src="{{avatarUrl}}"></image>
@@ -19,8 +19,8 @@
     </view>
     <view class="wallet">
         <view class="line_info" bindtap="toWallet">
-            <view class="line_info_img"><image src="../../assets/image/wallet.png"></image>钱包</view>
-            <view class="line_next"><image src="../../assets/image/next.png"></image></view>
+            <view class="line_info_img"><image src="http://7xld1x.com1.z0.glb.clouddn.com/wallet.png"></image>钱包</view>
+            <view class="line_next"><image src="http://7xld1x.com1.z0.glb.clouddn.com/next.png"></image></view>
         </view>
     </view>
 </view>

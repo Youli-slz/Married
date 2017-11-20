@@ -16,9 +16,9 @@
     <view class="guest_list_info">
         <view wx:for="{{item.textArray}}" wx:for-item="child" wx:key="{{index}}">
                 <view class="guest_line">
-                    <view class="line_image"><image src="../../../assets/image/default_people.png"></image></view>
+                    <view class="line_image"><image src="{{child.pic}}"></image></view>
                     <view class="line_name">{{child.nick_name}}</view>
-                    <view wx:if="{{RoleType}}"><picker bindchange="changeRole" data-id="{{child.id}}" value="{{index}}" range="{{RoleType}}" range-key="name"><view class="line_edit"><image src="../../../assets/image/edit.png"></image></view></picker></view>
+                    <view wx:if="{{RoleType}}"><picker bindchange="changeRole" data-id="{{child.id}}" value="{{index}}" range="{{RoleType}}" range-key="name"><view class="line_edit"><image src="http://7xld1x.com1.z0.glb.clouddn.com/edit.png"></image></view></picker></view>
                 </view>
                 <view wx:if="{{ index < item.textArray.length-1 }}" class="line_con"></view>        
             </view>

@@ -35,7 +35,7 @@ function Tunnel(serviceUrl) {
     if (currentTunnel && currentTunnel.status !== STATUS_CLOSED) {
         throw new Error('当前有未关闭的信道，请先关闭之前的信道，再打开新信道');
     }
-
+    console.log(serviceUrl)
     currentTunnel = this;
 
     // 等确认微信小程序全面支持 ES6 就不用那么麻烦了
@@ -356,7 +356,7 @@ function Tunnel(serviceUrl) {
      *   2. 如果 Ping 发送之后，超过这个时间还没收到 Pong，断开与服务器的连接
      * 该值将在与信道服务器建立连接后被更新
      */
-    let pingPongTimeout = 15000;
+    let pingPongTimeout = 1 *60*1000;
     let pingTimer = 0;
     let pongTimer = 0;
 

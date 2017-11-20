@@ -1,5 +1,6 @@
 // pages/wallet/wallet.js
-var sq = require('../../utils/sRequest.js');
+var constants = require('../../static/ProtocolType.js');
+var controller = require('../../utils/controller_onec.js');
 var uInfo;
 
 Page({
@@ -8,9 +9,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    Balance: null,
+    Balance: {recharge:"0.00", reward:"0.00", balance:"0.00"},
     selectArea: '',
     showlist: false,
+    descList:[]
   },
 
   /**
@@ -34,7 +36,7 @@ Page({
       })
     }
     console.log(this.data.showlist)
-
+    this.getbillList();
   },
 
   /**
@@ -47,26 +49,91 @@ Page({
   },
 
   /**
-   * 获取账户余额
+   * 发送获取账户余额请求
   */
   getbalance: function () {
     var that = this;
-    sq.POST({
-      url: '/socket/response.do',
-      servername: ' logic',
-      params:{
-        action_name: 'get_balance',
-        data: {
-          user_id: uInfo.id,
+      controller.REQUEST({
+        servername: constants.CONTANT_SERVER_NAME,
+        methodname: constants.GET_BALANCE,
+        data:{
+          action_name: 'get_balance',
+          data: {
+            user_id: uInfo.id,
+          }
         }
-      },
-      success: function (res) {
-        console.log(res);
-        that.setData({
-          Balance: res,
-        })
+      })
+  },
+
+  /**
+   * 获取账户余额数据
+  */
+  getBalanceData: function (data) {
+    var that = this;
+    that.setData({
+      Balance: data
+    })
+  },
+
+
+  /**
+   * 请求获取账单详情
+  */
+  getbillList: function () {
+    var that = this;
+    controller.REQUEST({
+      servername: constants.CONTANT_SERVER_NAME,
+      methodname: constants.GET_BALANCE_INFORMATION,
+      data:{
+        action_name: 'get_balance_information',
+        data:{
+          user_id: uInfo.id
+        }
       }
     })
+  },
+
+  /**
+   * 获取账单详情数据
+  */
+  getBillData: function (data) {
+    var that = this;
+    that.setData({
+      descList: data
+    })
+  },
+
+  /**
+   * 获取个人信息
+  */
+
+
+  /**
+   * 从信道获取数据并判断相应请求返回数据
+  */
+  getdata: function (server, method, data) {
+    var that = this;
+    if(typeof server == 'string'){
+      var ProtocolData = JSON.parse(data).data;
+      switch (method){
+        case constants.GET_BALANCE:
+          that.getBalanceData(ProtocolData);
+          break;
+        case constants.GET_BALANCE_INFORMATION:
+          that.getBillData(ProtocolData);
+          break;
+      }
+    } else {
+      console.log(server);
+    }
+  },
+
+  /**
+   * 创建页面时初始化页面请求
+  */
+  initPage: function () {
+    var that = this;
+    that.getbalance();
   },
 
   /**
@@ -76,14 +143,18 @@ Page({
     var that = this;
     uInfo = wx.getStorageSync('USER_INFO');
     that.getbalance();
-  
+    this.setData({
+      userId: uInfo.id
+    })
+    controller.init(this.initPage, this.getdata,);
   },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**

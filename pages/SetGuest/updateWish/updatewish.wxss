@@ -1,0 +1,35 @@
+
+.update{
+    background-color:#fff;
+    width: 100%;
+    border-top:20rpx solid #f0eff5;
+    display: flex;
+    justify-content: center;
+}
+
+textarea{
+    margin-top:20rpx;
+    margin-bottom: 20rpx;
+    padding-top:10rpx;
+    border: 2rpx solid #f0eff5;
+    border-radius: 10rpx;
+    text-indent: 30rpx;
+    padding-right:40rpx;
+    font-size:26rpx;
+}
+
+.place_style{
+    font-size: 26rpx;
+}
+
+.save_btn{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 100rpx;
+    background-color: #ff1c63;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

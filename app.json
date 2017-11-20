@@ -1,9 +1,7 @@
 {
   "pages": [
-    "pages/Scene/Scene",
     "pages/index/index",
-    "pages/Te/te",
-    "pages/user/user",
+    "pages/Person/Person",
     "pages/red_packet/red_packet",
     "pages/createWedding/Create",
     "pages/Main/Main",
@@ -15,12 +13,22 @@
     "pages/Main_sonPage/Guest/guest",
     "pages/Main_sonPage/statistic_guest/statistic_guest",
     "pages/Main_sonPage/CashGifts/cashgifts",
-    "pages/Person/Person",
     "pages/wallet/wallet",
     "pages/Reflect/Reflect",
-    "pages/Main_sonPage/format/formatList"
-
-
+    "pages/Main_sonPage/format/formatList",
+    "pages/Scene/Scene",
+    "pages/SetGuest/SetGuest",
+    "pages/SetGuest/updateWish/updatewish",
+    "pages/Main_sonPage/guestPhoto/photo",
+    "pages/Main_sonPage/Create_Card/Create",
+    "pages/Main_sonPage/AddCardPage/add_card_page",
+    "pages/Card_format/format_one/page_1/page",
+    "pages/confirmReflect/confirm",
+    "pages/Person/person_set/person_set",
+    "pages/test/test",
+    "pages/Main_sonPage/SetingCard/setting_card",
+    "pages/Main_sonPage/ImgHtml/img_html",
+    "pages/H5/h5_page"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -34,10 +42,6 @@
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
     "list": [
-      {
-        "pagePath": "pages/Scene/Scene",
-        "text": "测试"
-      },
       {
         "pagePath": "pages/index/index",
         "iconPath": "./assets/image/index_tab.png",

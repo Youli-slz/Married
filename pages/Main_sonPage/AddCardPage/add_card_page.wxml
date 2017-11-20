@@ -1,0 +1,4 @@
+
+    <view class="create_btn" bindtap="Create_card">
+        <text>开始制作</text>
+    </view>

@@ -1,0 +1,16 @@
+<view class="G_photo">
+    <view class="photo_list" wx:if="{{photoList.length != 0}}">
+        <block wx:for="{{ photoList }}" wx:key="{{ index }}">
+            <view class="add_image" wx:if="{{ item.type == '1' }}" bindtap="select" data-index="{{index}}" data-id="{{ item.id}}">
+                <view class="" bindtap="preview" data-url="{{ item.url }}"><image src="{{ item.url }}" mode="aspectFill"></image></view>
+            </view>
+            <view class="add_image" wx:else bindtap="select" data-index="{{index}}" data-id="{{ item.id}}">
+                <view class=""><video id="myvideo" src="{{ item.url }}" ></video></view>         
+            </view>
+        </block>
+    </view>
+    <view class="empty_list" wx:else>
+      <image src="http://7xld1x.com1.z0.glb.clouddn.com/empty.png"></image>
+      <view class="title">相册没有照片哦~</view>
+    </view>
+</view>

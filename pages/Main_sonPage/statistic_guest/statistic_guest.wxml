@@ -6,65 +6,74 @@
   <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">有事</view> 
 </view> 
   
-<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px" bindchange="bindChange"> 
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight*0.9}}px" bindchange="bindChange"> 
   <!-- 出席页面 -->
-  <swiper-item> 
+  <swiper-item>
+  <block wx:for="{{attend_list}}"  wx:key="{{item.id}}">
    <view class="attend">
      <view class="info">
-        <view class="info_img"><image src="../../../assets/image/default_people.png"></image></view>
+        <view class="info_img" wx:if="{{item.pic == ''}}"><image src="http://7xld1x.com1.z0.glb.clouddn.com/default_people.png"></image></view>
+        <view class="info_img" wx:else><image src="{{item.pic}}"></image></view>
             <view class="">
               <view class="info_msg">
-                <view class="info_name">昵称</view>
+                <view class="info_name">{{item.name}}</view>
                 <view class="info_num">(0人)</view>
                 <view class="info_money">
-                <view class="money_img"><image src="../../../assets/image/money1.png"></image>￥0.00</view>
+                <view class="money_img"><image src="http://7xld1x.com1.z0.glb.clouddn.com/money1.png"></image>￥{{item.money}}</view>
               </view>
-              <view class="guest_status"><picker bindchange="changestatus" range="{{lahei}}" class="img_down">出席<image src="../../../assets/image/down.png"></image></picker></view>
+              <view class="guest_status"><picker bindchange="changestatus" range="{{lahei}}" class="img_down">出席<image src="http://7xld1x.com1.z0.glb.clouddn.com/down.png"></image></picker></view>
             </view>
-            <view class="info_phone">手机号: 13657465746</view>
+            <view class="info_phone">手机号: {{item.phone}}</view>
          </view>
      </view>
-     <view class="info_words">恭喜，祝你们共享爱情，共青风雨，白头偕老，追你们青春美丽，人生美丽，生命武汉。</view>
+     <view class="info_words">{{item.wish}}</view>
    </view>
+   </block>
   </swiper-item> 
   <!-- 待定页面 -->
-  <swiper-item> 
+  <swiper-item>
+  <block wx:for="{{pending_list}}" wx:key="{{item.id}}">
    <view class="pending">
      <view class="info">
-        <view class="info_img"><image src="../../../assets/image/default_people.png"></image></view>
+        <view class="info_img" wx:if="{{item.pic == ''}}"><image src="http://7xld1x.com1.z0.glb.clouddn.com/default_people.png"></image></view>
+        <view class="info_img" wx:else><image src="{{item.pic}}"></image></view>
             <view class="">
               <view class="info_msg">
-                <view class="info_name">昵称</view>
+                <view class="info_name">{{item.name}}</view>
                 <view class="info_num">(0人)</view>
                 <view class="info_money">
-                <view class="money_img"><image src="../../../assets/image/money1.png"></image>￥0.00</view>
+                <view class="money_img"><image src="http://7xld1x.com1.z0.glb.clouddn.com/money1.png"></image>￥{{item.money}}</view>
               </view>
-              <view class="guest_status"><picker bindchange="changestatus" range="{{lahei}}" class="img_down">出席<image src="../../../assets/image/down.png"></image></picker></view>
+              <view class="guest_status"><picker bindchange="changestatus" range="{{lahei}}" class="img_down">出席<image src="http://7xld1x.com1.z0.glb.clouddn.com/down.png"></image></picker></view>
             </view>
-            <view class="info_phone">手机号: 13657465746</view>
+            <view class="info_phone">手机号: {{item.phone}}</view>
          </view>
      </view>
-     <view class="info_words">恭喜，祝你们共享爱情，共青风雨，白头偕老，追你们青春美丽，人生美丽，生命武汉。</view>
+     <view class="info_words">{{item.wish}}</view>
    </view>
+  </block>
   </swiper-item> 
   <!-- 有事页面 -->
-  <swiper-item> 
+  <swiper-item>
+  <block wx:for="{{absence_list}}" wx:key="{{item.id}}">
    <view class="absence">
      <view class="info">
-        <view class="info_img"><image src="../../../assets/image/default_people.png"></image></view>
+        <view class="info_img" wx:if="{{item.pic == ''}}"><image src="http://7xld1x.com1.z0.glb.clouddn.com/default_people.png"></image></view>
+        <view class="info_img" wx:else><image src="{{item.pic}}"></image></view>
             <view class="">
               <view class="info_msg">
-                <view class="info_name">昵称</view>
+                <view class="info_name">{{item.name}}</view>
                 <view class="info_num">(0人)</view>
                 <view class="info_money">
-                <view class="money_img"><image src="../../../assets/image/money1.png"></image>￥0.00</view>
+                <view class="money_img"><image src="http://7xld1x.com1.z0.glb.clouddn.com/money1.png"></image>￥{{item.money}}</view>
               </view>
-              <view class="guest_status"><picker bindchange="changestatus" range="{{lahei}}" class="img_down">出席<image src="../../../assets/image/down.png"></image></picker></view>
+              <view class="guest_status"><picker bindchange="changestatus" range="{{lahei}}" class="img_down">出席<image src="http://7xld1x.com1.z0.glb.clouddn.com/down.png"></image></picker></view>
             </view>
             <view class="info_phone">手机号: 13657465746</view>
          </view>
      </view>
-     <view class="info_words">恭喜，祝你们共享爱情，共青风雨，白头偕老，追你们青春美丽，人生美丽，生命武汉。</view>
-   </view> 
+     <view class="info_words">{{item.wish}}</view>
+   </view>
+  </block> 
   </swiper-item> 
 </swiper> 

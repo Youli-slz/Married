@@ -1,2 +1,36 @@
-<!--pages/Main_sonPage/format/formatList.wxml-->
-<text>pages/Main_sonPage/format/formatList.wxml</text>
+<view class="format">
+    <view class="left"  bindtap="uppage"><image src="http://7xld1x.com1.z0.glb.clouddn.com/make_11.png"></image></view>
+    <swiper current="{{currentTab}}">
+        <swiper-item>
+            <view class="backImg"><image src="http://7xld1x.com1.z0.glb.clouddn.com/photo_1.jpg" mode="aspectFill"></image></view>
+            <view class="imgIcon"><image src="http://7xld1x.com1.z0.glb.clouddn.com/make_07.png"></image></view>
+        </swiper-item>
+        <swiper-item>
+            <view class="backImg"><image src="http://7xld1x.com1.z0.glb.clouddn.com/photo_2.jpg"  mode="aspectFill"></image></view>
+        </swiper-item>
+        <swiper-item>
+            <view class="backImg"><image src="http://7xld1x.com1.z0.glb.clouddn.com/photo_3.jpg"  mode="aspectFill"></image></view>
+        </swiper-item>
+        <swiper-item>
+            <view class="backImg"><image src="http://7xld1x.com1.z0.glb.clouddn.com/photo_4.jpg"  mode="aspectFill"></image></view>
+        </swiper-item>
+    </swiper>
+    <view class="right" bindtap="downpage"><image src="http://7xld1x.com1.z0.glb.clouddn.com/make_14.png"></image></view>
+</view>
+
+<view class="footBar" style="height:{{windowHeight* 0.075}}px">
+    <view class="line"></view>
+    <view class="icon_tab">
+        <image src="http://7xld1x.com1.z0.glb.clouddn.com/make_26.png"></image>
+        <view class="icon_words">音乐</view>
+    </view>
+    <view class="icon_tab_center">
+        <image src="http://7xld1x.com1.z0.glb.clouddn.com/make_23.png"></image>
+        <view class="icon_words">发送</view>
+    </view>
+    <view class="icon_tab">
+        <image src="http://7xld1x.com1.z0.glb.clouddn.com/make_28.png"></image>
+        <view class="icon_words">预览</view>
+    </view>
+    <view class="line"></view>
+</view>

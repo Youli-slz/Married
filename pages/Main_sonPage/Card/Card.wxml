@@ -1,10 +1,33 @@
-<view class="Card">
+<view class="{{Card_list.length == 0 ? 'Card2': 'Card'}}" wx:if="{{user_role < 5}}">
     <view class="css_line"></view>
-    <view class="Card_empty" wx:if="{{ !Card_list }}">
-        <image src="../../../assets/image/inv_03.png"></image>
+    <view class="Card_empty" wx:if="{{ Card_list.length == 0 }}">
+        <image src="http://7xld1x.com1.z0.glb.clouddn.com/inv_03.png"></image>
         <view class="empty_text"><text>还未创建请帖哦~</text></view>
+    </view>
+    <view class="Card_list" wx:else>
+        <block wx:for="{{Card_list}}" wx:key="{{index}}">
+            <view class="">
+                <view class="" bindtap="previewCard" data-preview="{{item.preview_link}}"><image src="{{item.cover_pic}}"></image></view>
+                <view class="delete_btn" bindtap="delete_Card" data-index="{{index}}"><image src="http://7xld1x.com1.z0.glb.clouddn.com/del_03.png"></image></view>
+            </view>
+        </block>
     </view>
     <view class="create_btn" bindtap="Create_card">
         <text>创 建 请 帖</text>
+    </view>
+</view>
+
+<view class="{{Card_list.length == 0 ? 'Card2': 'Card'}}" wx:else>
+    <view class="css_line"></view>
+    <view class="Card_empty" wx:if="{{ Card_list.length == 0 }}">
+        <image src="http://7xld1x.com1.z0.glb.clouddn.com/inv_03.png"></image>
+        <view class="empty_text"><text>还未收到请帖哦~</text></view>
+    </view>
+    <view class="Card_list" wx:else>
+        <block wx:for="{{Card_list}}" wx:key="{{index}}">
+            <view class="">
+                <image src="{{item}}"></image>
+            </view>
+        </block>
     </view>
 </view>

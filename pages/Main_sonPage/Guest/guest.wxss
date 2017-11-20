@@ -1,12 +1,19 @@
 /* pages/Main_sonPage/Guest/guest.wxss */
 @import "../../../components/wxSortPickerView/wxSortPickerView.wxss";
 .search{
-    background-color: #fff;
+
     height: 100rpx;
-    border-top: 1rpx solid #e7e7e7;
+
     display: flex;
     align-items: center;
     padding-left: 40rpx;
+}
+.search_box{
+    border-top: 1rpx solid #e7e7e7;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 .search_image{
     display: flex;
@@ -54,9 +61,16 @@
     background-color: #ff1c63;
     border-radius: 10rpx;
     color: #fff;
-    width: 100rpx;
-    text-align: center;
+    width: 90rpx;
+    height: 40rpx;
+    /* text-align: center; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-right: 10rpx;
+}
+.line_type_role{
+    font-size: 24rpx;
 }
 
 .guest_line{
@@ -81,6 +95,7 @@
 .line_image image{
     width: 100rpx;
     height: 100rpx;
+    border-radius: 50%;
 }
 .line_edit image{
     width: 30rpx;
@@ -104,4 +119,22 @@
     padding-bottom: 15rpx;
     background-color: #fff;
     padding-left: 40rpx;
+}
+
+.search_enpty{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.empty_word{
+    margin-top:50rpx;
+    font-size: 28rpx;
+    color:#c3c3c4;
+}
+.cancel_title{
+    font-size: 28rpx;
+    color: #c3c3c4;
+    padding-right: 40rpx;
 }

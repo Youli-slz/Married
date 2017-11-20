@@ -10,9 +10,9 @@ var buildSessionHeader = function buildSessionHeader() {
     var session = Session.get();
     var header = {};
 
-    if (session && session.id && session.skey) {
-        header[constants.WX_HEADER_ID] = session.id;
-        header[constants.WX_HEADER_SKEY] = session.skey;
+    if (session && session.user_id) {
+        console.log(session);
+        header[constants.WX_USER_ID] = session.user_id;
         header[constants.WX_APP_ID] = config.header.AppId;
     }
 

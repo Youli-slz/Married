@@ -39,8 +39,8 @@
     align-items: center;
 }
 .voice_image image{
-    width: 48rpx;
-    height: 48rpx;
+    width: 52rpx;
+    height: 52rpx;
 }
 .foot_input{
     width: 570rpx;
@@ -59,8 +59,8 @@
     padding-left:10rpx;
 }
 .foot_more image{
-    width: 48rpx;
-    height: 48rpx;
+    width: 52rpx;
+    height: 52rpx;
 }
 
 .foot_tape{
@@ -108,12 +108,13 @@
 .other{
     display: flex;
     align-items: center;
-    min-height: 168rpx;
-    margin-top: 20rpx;
+    min-height: 130rpx;
+    /* margin-top: 20rpx; */
 }
 .other .info{
     margin-right: 128rpx;
     padding-bottom: 20rpx;
+    text-align: left;
     /* border-bottom: 2rpx solid #e0e0e0; */
 }
 .other .avater image{
@@ -140,8 +141,8 @@
 .me{
     display: flex;
     align-items: center;
-    min-height: 168rpx;
-    margin-top: 20rpx;
+    min-height: 130rpx;
+    /* margin-top: 20rpx; */
     justify-content: flex-end;    
 }
 .me .avater image{
@@ -167,22 +168,49 @@
     font-size: 30rpx;
     color: #333;
 }
+.content text{
+    word-wrap : break-word;
+}
 .content image{
     width: 200rpx;
     height: 150rpx;
     margin-top:10rpx;
 }
 .me .content image{
-    margin-left:20rpx;
+    margin-left:10rpx;
+    border-radius: 20rpx;
+
+}
+.content_image image{
+    border: 2rpx solid #fff;
 }
 .other .content image{
-    margin-right: 20rpx;
+    margin-right: 10rpx;
+    border-radius: 20rpx;
+    border: 2rpx solid #fff;
 }
 
+.me .content{
+    display: flex;
+    align-items: center;
+    background-color: #ff3071;
+    color: #fff;
+    padding: 13rpx 20rpx;
+    border-radius: 40rpx 0rpx 40rpx 40rpx;
+    word-break:break-all;
+}
+.other .content{
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    padding: 13rpx 20rpx;
+    border-radius: 0rpx 40rpx 40rpx 40rpx;
+    word-break:break-all;
+}
 .system_msg{
     display: flex;
     justify-content: center;
-    margin: 30rpx 0;
+    padding: 0rpx 0 30rpx 0;
 }
 .sys_content{
     background-color: #d8d8d8;
@@ -254,9 +282,16 @@
     background-color: #ff1c63;
     border-radius: 10rpx;
     color: #fff;
-    width: 100rpx;
-    text-align: center;
+    width: 90rpx;
+    height: 40rpx;
+    /* text-align: center; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-right: 10rpx;
+}
+.line_type_role{
+    font-size: 24rpx;
 }
 
 .guest_line{
@@ -281,6 +316,7 @@
 .line_image image{
     width: 100rpx;
     height: 100rpx;
+    border-radius: 50%;
 }
 .line_edit image{
     width: 30rpx;
@@ -299,4 +335,75 @@
     padding-bottom: 15rpx;
     background-color: #fff;
     padding-left: 40rpx;
+}
+
+
+
+.noMore{
+    margin-top: 10rpx;
+    display: flex;
+    justify-content: center;
+    color:#d8d8d8;
+}
+.noMore text{
+    font-size:28rpx;
+}
+
+.showMore{
+    margin-top: 10rpx;
+    display: flex;
+    justify-content: center;
+    color:#d8d8d8;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation{
+    from{transform: rotate(360deg);}
+    to{transform: rotate(0deg);}
+}
+
+.send_content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.sendLoading image{
+    width: 33rpx;
+    height: 33rpx;
+    animation: send 0.5s linear infinite;
+}
+
+.sendLoading{
+    margin-right: 6rpx;
+    width: 33rpx;
+    height: 33rpx;
+
+}
+
+@keyframes send{
+    from{transform: rotate(360deg);}
+    to{transform: rotate(0deg);}
+}
+
+.sendError{
+    margin-right: 6rpx;
+    width: 33rpx;
+    height: 33rpx;
+}
+.sendError image{
+    width: 33rpx;
+    height: 33rpx;
+}
+
+.recrod_msg{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 100rpx;
+    max-width: 400rpx;
+}
+
+.createTime{
+    font-size: 28rpx;
 }

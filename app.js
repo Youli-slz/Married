@@ -3,8 +3,9 @@ import { $WxDialog, $WxToast } from './components/wx';
 var qcloud = require('./static/bower_components/wafer-client-sdk/index');
 var constants = require('./static/bower_components/wafer-client-sdk/lib/constants')
 var config = require('./config');
-var request = require('./utils/sRequest');
 var SESSION_KEY = 'weapp_session_' + constants.WX_SESSION_MAGIC_ID;
+
+var Socket = require('./utils/init.js');
 
 //================================================================
 /**
@@ -38,13 +39,24 @@ var showFail = (title, content) => {
 
 // 页面配置
 App({
-  request : request,
+  // request : request,
   /**
    * 页面加载中生命周期
   */
   onLaunch: function () {
     qcloud.setLoginUrl(config.service.loginUrl);                   // 初始化客户端的登录地址， 以支持所有的会话操作
     this.login();                                                  // 调用登录函数
+  },
+
+  onHide: function () {
+    console.log('关闭信道')
+    this.globalData.ishidden = true;
+    // Socket.tunnel.close();
+  },
+  onShow: function ()  {
+    this.globalData.ishidden = false;
+    // Socket.on('')
+    // Socket.CONNECT();
   },
 
   /**
@@ -88,7 +100,7 @@ App({
             if (res.authSetting["scope.userInfo"]) {                            // 如果用户重新同意了授权登录
               wx.getUserInfo({                                                  // 跟上面的wx.getUserInfo  sucess处理逻辑一样
                 success: function (res) {
-                  that.getUserInfo();                                           // 在没有登陆的时候会先请求登陆接口然后调用请求获取用户信息
+                  that.getUserInfo();                                         // 在没有登陆的时候会先请求登陆接口然后调用请求获取用户信息
                 }
               })
             } else {                                                            // 用户还是拒绝
@@ -145,6 +157,7 @@ App({
       })
     } else {                                         // 如果登录过
       console.log(uInfo);
+      // that.connect();
       that.globalData.userInfo = uInfo;
       return false;
     }
@@ -154,7 +167,9 @@ App({
    * 全局变量globalData
   */
   globalData: {
+    default_avatar:'http://7xld1x.com1.z0.glb.clouddn.com/tmp/wxf4d6959f359f26ad.o6zAJs6e4iQOHuo7DT2vSURT-cTg.c7487d2bbdfec71659c8116ee0342a59.png',
     userInfo: null,
     // role: null                // 登录用户的角色  1.创建人 2.新郎 3.新娘 4.管理员 5.宾客 
+    ishidden: false
   }
 })

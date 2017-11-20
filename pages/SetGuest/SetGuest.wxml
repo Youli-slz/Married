@@ -1,0 +1,36 @@
+<view class="guest_info">
+  <view class="guest_name">
+    <view class="line_info">
+      <view class="">您的姓名</view>
+      <view class=""><input type="text" value="{{name}}" placeholder="姓名" bindblur="getname" /></view>
+    </view>
+    <view class="line_info" style="border-top:2rpx solid #f0eff5">
+      <view class="">联系电话</view>
+      <view class=""><input type="number" value="{{phone}}" placeholder="手机" bindblur="getphone"/></view>
+    </view>
+  </view>
+  <view class="attend_status">
+    <view class="line_info">
+      <view class="">出席情况</view>
+      <view class="select">
+        <picker bindchange="bindPickerChange" value="{{currentValue}}" range="{{status}}"><view>{{status[currentValue]}}</view></picker>
+      </view>
+    </view>
+    <view class="line_info">
+      <view class="">出席人数</view>
+      <view class="attend_num"><input type="text" value="{{people_num}}" placeholder="人数" bindblur="getpeopleNum"/></view>
+    </view>
+  </view>
+  <view class="attend_wish">
+    <view class="line_info" bindtap="toUpdateWish">
+      <view class="">您的祝福</view>
+      <view class="my_wish">
+        <view class="wish_words">{{wish}}</view>
+        <image src="http://7xld1x.com1.z0.glb.clouddn.com/next.png"></image>
+      </view>
+    </view>
+  </view>
+  <view class="save_btn" bindtap="saveGuestInfo">
+    <view>保存</view>
+  </view>
+</view>

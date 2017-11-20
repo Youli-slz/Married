@@ -97,11 +97,11 @@ var login = function login(options) {
         header[constants.WX_HEADER_ENCRYPTED_DATA] = encryptedData;
         header[constants.WX_HEADER_IV] = iv;
         header[constants.WX_APP_ID] = config.header.AppId;
-        header[constants.WX_SERVER_NAME] = 'logic'
+        header[constants.WX_SERVER_NAME] = 'wedding'
 
         // 请求服务器登录地址，获得会话信息
         wx.request({
-            url: 'https://47602916.qcloud.la/socket/response.do',
+          url: 'https://access.djtaoke.cn/socket/response.do',
             header: header,
             method: options.method,
             data: {
@@ -111,7 +111,7 @@ var login = function login(options) {
 
             success: function (result) {
                 var data = result.data.data;
-
+                console.log(data);
                 // 成功地响应会话信息
                 if (data && data[constants.WX_SESSION_MAGIC_ID]) {
                     if (data.session) {

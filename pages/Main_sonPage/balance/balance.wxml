@@ -4,7 +4,7 @@
     </view>
     <view class="showMoney">
         <view class="title"><text>您总计收到礼金</text></view>
-        <view class="money"><text>￥0.00</text></view>
+        <view class="money"><text>￥{{SumMoney}}</text></view>
     </view>
     <view class="empty" wx:if="{{ !MoneyList.length }}">
         <view class="empty_text"><text>您还未收到礼金~</text></view>
@@ -13,13 +13,13 @@
     <view class="moneylist" wx:else>
     <block wx:for="{{ MoneyList }}" wx:key="{{ index }}">
       <view class="line_info">
-        <view class="line_image"><image src="../../../assets/image/default_people.png"></image></view>
+        <view class="line_image"><image src="{{item.pic}}"></image></view>
         <view class="info">
             <view class="info_ND">
-                <view class="name">{{item.nick}}</view>
-                <view class="date">{{item.time}}</view>
+                <view class="name">{{item.name}}</view>
+                <view class="date">{{item.create_at}}</view>
             </view>
-            <view class="words">{{item.words}}</view>  
+            <view class="words">祝福：{{item.wish}}</view>  
         </view>
         <view class="cash">
             <text>￥{{ item.money }}</text>

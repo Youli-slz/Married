@@ -2,11 +2,11 @@
     <view class="mywedding">
         <view class="myCard">
             <view class="Card_title">
-                <image src="../../assets/image/card_1.png"></image>
-                <text>我的请帖(0条弹幕)</text>
+                <image src="http://7xld1x.com1.z0.glb.clouddn.com/card_1.png"></image>
+                <text>我的请帖</text>
             </view>  
             <view class="toAdd" bindtap="goadd">
-                <image src="../../assets/image/add.png"></image>
+                <image src="http://7xld1x.com1.z0.glb.clouddn.com/add.png"></image>
             </view>
         </view>
         <block wx:for="{{ my_invitation }}" wx:key="{{ index }}">
@@ -43,7 +43,7 @@
     <view class="getCard">
         <view class="myCard">
             <view class="Card_title">
-                <image src="../../assets/image/card_1.png"></image>
+                <image src="http://7xld1x.com1.z0.glb.clouddn.com/card_1.png"></image>
                 <text>收到请帖 ({{other_count}})</text>
             </view>
         </view>
@@ -63,14 +63,18 @@
                 <image src="{{ item.pic }}" mode="aspectFill"></image>
             </view>
         </view>
-        <view class="Address" bindtap="toMap" data-latitude="{{ item.latitude }}" data-longitude="{{ item.longitude }}">
+        <view class="Address" bindtap="{{item.latitude && item.longitude ?'toMap' : ''}}" data-latitude="{{ item.latitude }}" data-longitude="{{ item.longitude }}">
             <view class="addressImg"> 
-                <image src="../../assets/image/location.png"></image>
+                <image src="http://7xld1x.com1.z0.glb.clouddn.com/location.png"></image>
             </view>
-            <view class="">
-                <text style="font-size: 28rpx;font-weight: 900;">{{item.site}}</text>
+            <view class="" wx:if="{{item.site.address}}">
+                <text style="font-size: 28rpx;font-weight: 900;">{{item.site.address+ item.site.name}}</text>
             </view>
         </view>
         </block>
+        <view class="empty_list" wx:if="{{other_invitation.length == 0}}">
+            <image src="http://7xld1x.com1.z0.glb.clouddn.com/empty.png"></image>
+            <view class="title">没有收到请帖哦~</view>
+        </view>
     </view>
 </view>

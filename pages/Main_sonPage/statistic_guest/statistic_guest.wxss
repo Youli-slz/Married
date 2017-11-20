@@ -64,6 +64,7 @@
 .info_img image{
     width: 100rpx;
     height: 100rpx;
+    border-radius: 50%;
 }
 .info_msg{
     display: flex;

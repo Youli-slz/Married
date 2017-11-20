@@ -4,7 +4,10 @@ var constants = require('../static/bower_components/wafer-client-sdk/lib/constan
 const SESSION_KEY = 'weapp_session_' + constants.WX_SESSION_MAGIC_ID;
 var qinniu = require('../static/qiniu-sdk/sdk/qiniuUploader');
 
+var Socket = require('./init.js');
+
 var uptoken = '';
+var Data_Content;
 //========================================================================
 var showBusy = text => wx.showToast({
     title: text,
@@ -66,6 +69,40 @@ function isNull(value) {
     return false
 }
 
+
+
+/**
+ * websocket 请求默认参数
+*/
+function setSocketDefault() {
+    return {
+        userid: getApp().globalData.userInfo.id,
+        appid: config.header.AppId
+    }
+}
+
+/**
+ * @param {Object} data 请求的参数
+ * @param {String} servername 服务名称
+ * @param {String} methodname 方法名称
+ * 
+*/
+function websocketRequest( opt = {} ){
+    var data;
+    const options = Object.assign({}, setSocketDefault(), opt);
+    Socket.tunnel.on('connect', ()=>{console.log('sRequest: 链接')})
+    Socket.tunnel.on('error', (error)=>{console.log('sRequest: '+error)})
+    Socket.tunnel.on('reconnecting', ()=>{console.log('sRequest: reconnecting')})
+    Socket.tunnel.on('reconnect', ()=>{console.log('sRequest: reconnect')})
+    Socket.tunnel.emit('socket',JSON.stringify(options));
+    // console.log(JSON.stringify(options));
+}
+ 
+
+
+
+
+
 /**
  * @param {String} url host后面具体的请求路径
  * @param {Object} params 请求要传的参数
@@ -105,10 +142,8 @@ function networkRequest(
                 if (data.code == 0) {
                     if (isFunction(success)) {
                         if (isNull(data)) {
-                            console.log(1);
                             success(null);
                         } else {
-                            console.log(2);
                             success(data.data);
                         }
                     } else {
@@ -117,21 +152,17 @@ function networkRequest(
                 }
                 else {
                     if (isFunction(failure)) {
-                        console.log(3);
                         failure(data.msg);
                     }
                     else {
-                        console.log(4);
                         failure(MessageCode.ErrorCode.CALLBACK_FAILURE_IS_NOT_FUNCTION);
                     }
                 }
             },
             fail: function (res) {
                 if (isFunction(failure)) {
-                    console.log(5);
                     failure(res)
                 } else {
-                    console.log(6);
                     failure(MessageCode.ErrorCode.CALLBACK_FAILURE_IS_NOT_FUNCTION);
                 }
             }
@@ -139,10 +170,8 @@ function networkRequest(
     }
     catch (error) {
         if (isFunction(failure)) {
-            console.log(7)
             failure(error);
         } else {
-            console.log(8);
             failure(MessageCode.ErrorCode.CALLBACK_FAILURE_IS_NOT_FUNCTION);
         }
     }
@@ -178,7 +207,6 @@ function GET(opt = {}) {
     } else {
         networkRequest(config.service.tunnelUrl + options.url, options.params, options.servername, options.methodname, options.success, options.failure, "GET");
     }
-
 }
 
 /**
@@ -201,7 +229,37 @@ function POST(opt = {}) {
     } else {
         networkRequest(config.service.tunnelUrl + options.url, options.params, options.servername, options.methodname, options.success, options.failure);
     }
+}
 
+
+/**
+ * 协议类别默认参数
+*/
+function proDefault() {
+    return {
+        pro_type: config.Type.ProtocolType,
+        meth_type: 'post'
+    }
+}
+
+/**
+ * 判断调用的是wss方法 还是 https
+ * @param {String} pro_type
+ * @param {String} meth_type
+*/
+
+function checkMethod (opt = {}) {
+    const options = Object.assign({}, proDefault(), opt);
+    console.log(options)
+    if(options.pro_type == 'wss'){
+        websocketRequest(options);
+    }else{
+        if(options.meth_type == 'post'){
+            POST(options);
+        } else {
+            GET(options);
+        }
+    }
 }
 
 function getUptoken(
@@ -217,7 +275,7 @@ function getUptoken(
             action_name: "upload_token",
             data: "upload_token"
         },
-        servername: 'logic',
+        servername: 'wedding',
 
         success: function (data) {
             console.log(data);
@@ -244,21 +302,20 @@ function UploadImg(
     failure                                             　　　　　　　　　　　　　 // 上传失败后的回调函数
 ) {
     var that = this;
-    // console.log(uptoken);
-    // console.log(filePaths);
+    console.log(filePaths);
     for (var i = 0; i < filePaths.length; i++) {
         var filePath = filePaths[i];
         qinniu.upload(filePath, (res) => {
             if (isFunction(success)) {
                 success(res);
-                console.log(res);
+                // console.log(res);
                 // console.log("11"+res);
             }
         }, (error) => {
             failure('error' + error);
         }, {
                 region: 'ECN',
-                domain: 'http://7xld1x.com1.z0.glb.clouddn.com',                              // bucket域名， 下载资源时用到
+                domain: 'https://oss.ririyuedu.com',                              // bucket域名， 下载资源时用到
                 key: '',                                 // key自定义文件，【非必须】如果不设置，默认为使用微信小程序API的临时文件名，
                 //一下方法三选一， 优先级为 utoken > uptokenURL > uptokenFunc  
                 uptoken: uptoken,                    // 由其他程序生成七牛
@@ -289,7 +346,7 @@ function UploadVideo(
             failure('error' + error);
         }, {
                 region: 'ECN',
-                domain: 'http://7xld1x.com1.z0.glb.clouddn.com',                              // bucket域名， 下载资源时用到
+                domain: 'https://oss.ririyuedu.com',                              // bucket域名， 下载资源时用到
                 key: '',                                 // key自定义文件，【非必须】如果不设置，默认为使用微信小程序API的临时文件名，
                 //一下方法三选一， 优先级为 utoken > uptokenURL > uptokenFunc  
                 uptoken: uptoken,                    // 由其他程序生成七牛
@@ -300,8 +357,7 @@ function UploadVideo(
 }
 
 module.exports = {
-    GET: GET,
-    POST: POST,
     Upload: getUptoken,
+    FunType: checkMethod
 }
 

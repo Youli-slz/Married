@@ -4,7 +4,7 @@
             <view class="title_words">钱包余额</view>
             <view class="title_balance">￥<text>{{Balance.balance}}</text></view>
         </view>
-        <view class="title_next"><image src="../../assets/image/next_white.png"></image></view>
+        <view class="title_next"><image src="http://7xld1x.com1.z0.glb.clouddn.com/next_white.png"></image></view>
     </view>
     <view class="PayIncome_info">
         <view class="line_con"></view>
@@ -15,24 +15,22 @@
     </view>
     <view class="detail_btn" bindtap="showdetail">
         <view class="detail_title">查看明细</view>
-        <view class="detail_img"><image src="../../assets/image/down_1.png" class="{{selectArea}}"></image></view>
+        <view class="detail_img"><image src="http://7xld1x.com1.z0.glb.clouddn.com/down_1.png" class="{{selectArea}}"></image></view>
     </view>
     <view class="detail_list" wx:if="{{showlist}}">
-        <view class="list_info">
-            <view class="list_img_money"><image src="../../assets/image/money2.png"></image></view>
+    <block wx:for="{{descList}}" wx:key="{{index}}">
+        <view class="list_info" >
+            <view class="list_img_money"><image src="http://7xld1x.com1.z0.glb.clouddn.com/money2.png"></image></view>
             <view class="cash_list_info">
-                <view class="words">礼金——来自胡歌</view>
-                    <view class="time">12月23日 21:12</view>
-                </view>
-            <view class="cash_list_money">+990.00</view>
+                <view class="words" style="display: flex;">礼金-{{item.user_id == userId ? '发给' : '来自'}}<view wx:if="{{item.user_id == userId}}">{{item.founder_name}}</view><view wx:else>{{item.user_name}}</view></view>
+                <view class="time">{{item.create_time}}</view>
+            </view>
+            <view class="cash_list_money">{{item.user_id == userId ? '-' : '+'}}{{item.money}}</view>
         </view>
-        <view class="list_info">
-            <view class="list_img_red"><image src="../../assets/image/redpage.png"></image></view>
-            <view class="cash_list_info">
-                <view class="words">礼金——来自胡歌</view>
-                    <view class="time">12月23日 21:12</view>
-                </view>
-            <view class="cash_list_money">+990.00</view>
+    </block>
+        <view class="empty_list" wx:if="{{descList.length == 0}}">
+            <image src="http://7xld1x.com1.z0.glb.clouddn.com/empty.png"></image>
+            <view class="title">没有收到请帖哦~</view>
         </view>
     </view>
 </view>

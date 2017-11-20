@@ -124,8 +124,8 @@
     align-items: center;
 }
 .list_img_money image{
-    width: 75rpx;
-    height: 78rpx;
+    width: 56rpx;
+    height: 58rpx;
 }
 
 .list_img_red{
@@ -134,8 +134,8 @@
     align-items: center;
 }
 .list_img_red image{
-    width: 69rpx;
-    height: 79rpx;
+    width: 48rpx;
+    height: 56rpx;
 }
 
 .cash_list_info .words{
@@ -151,3 +151,33 @@
     color: #ff1c63;
     padding-left: 10rpx;
 }
+
+.cash_list_info .words{
+    font-size: 28rpx;
+}
+.cash_list_info .time{
+    font-size: 22rpx;
+    color: #c1c1c1;
+}
+
+.empty_list{
+    margin-top:40rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+  }
+  .empty_list image{
+    width:294rpx;
+    height: 192rpx;
+  }
+  .empty_list .title{
+    display: flex;
+    justify-content: center;
+    height:30rpx;
+    margin-top:20rpx;
+    padding-bottom: 20rpx;
+    font-size: 28rpx;
+    color:#c3c3c4;
+    background-color:#fff;
+  }

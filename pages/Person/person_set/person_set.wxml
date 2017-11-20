@@ -1,0 +1,15 @@
+<view class="setPerson">
+  <view class="guest_name">
+    <view class="line_info">
+      <view class="">姓名</view>
+      <view class=""><input type="text" value="{{Name}}" placeholder="姓名" bindblur="getName" /></view>
+    </view>
+    <view class="line_info" style="border-top:2rpx solid #f0eff5">
+      <view class="">电话</view>
+      <view class=""><input type="number" value="{{Phone}}" placeholder="手机" bindblur="getPhone"/></view>
+    </view>
+  </view>
+        <view class="save_btn" bindtap="savePersonInfo">
+            <view>保存</view>
+        </view>
+</view>

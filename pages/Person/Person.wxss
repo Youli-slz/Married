@@ -10,14 +10,16 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    position: fixed;
+    top:154rpx;
 }
 .avatarUrl image{
     width: 190rpx;
     height: 190rpx;
     border-radius: 50%;
     border: 6rpx solid #f0eff5;
-    position: absolute;
-    top:154rpx;
+    /* position: absolute;
+    top:154rpx; */
 }
 
 .nick_name{
@@ -53,8 +55,15 @@
 .line_info_img image{
     width: 38rpx;
     height: 28rpx;
+    margin-right: 10rpx;
 }
 .line_next image{
     width: 32rpx;
     height: 32rpx;
+}
+
+.edit_btn{
+    position: fixed;
+    top: 20rpx;
+    right: 20rpx;
 }

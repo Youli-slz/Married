@@ -7,8 +7,8 @@
             <view class="form_col_image" bindtap="chooseImage">
                 <view class="col_title"><text>封面</text></view>
                 <view class="Cover_Image">
-                    <view class="col_cover" wx:if="{{ cover }}"><image src="{{ cover }}"></image></view>
-                    <view class="col_Image"  name="image"><image src="../../assets/image/next.png"></image></view>
+                    <view class="col_cover" wx:if="{{ cover }}"><image src="{{ cover }}" mode="aspectFill"></image></view>
+                    <view class="col_Image"  name="image"><image src="http://7xld1x.com1.z0.glb.clouddn.com/next.png"></image></view>
                 </view>
             </view>
             <view class="line_com"></view>
@@ -47,8 +47,14 @@
             <view class="line_com" style="border-bottom:#f0eff5 20rpx solid;margin-left:0px;"></view>
             <view class="form_last_col" >
                 <view class="col_title"><text>地址</text></view>
-                <view class="col_input" bindtap="getAddr"><input type="text" name="address" style="text-align:right;" id="text" placeholder="请设置婚礼地址" placeholder-class="input_font" value="{{ address }}" ></input></view>
+                <view class="col_input" bindtap="getAddr"><input type="text" name="address" style="text-align:right;" id="text" placeholder="请设置婚礼地址" placeholder-class="input_font" value="{{ address.name }}" ></input></view>
             </view>
+            <view class="line_com"></view>
+            <view class="form_col">
+                <view class="col_title"><text>宴会厅</text></view>
+                <view class="col_input"><input type="text" name="address" style="text-align:right;" id="text" placeholder="请设置婚礼宴会厅" placeholder-class="input_font" bindinput="getbanquet_hall" ></input></view>
+            </view>
+
         </view>
         <view class="form_button">
             <button class="{{ submitStyle }}"  formType="submit">创建</button>

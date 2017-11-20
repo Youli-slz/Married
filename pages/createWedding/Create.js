@@ -1,5 +1,7 @@
 import { $WxToptips } from '../../components/wx';
 import WxValidate from '../../utils/WxValidate.js';
+var constants = require('../../static/ProtocolType.js');
+var controller = require('../../utils/controller_onec.js');
 var sq = require('../../utils/sRequest.js');
 var Validate = "";
 var app = getApp();
@@ -15,11 +17,12 @@ Page({
     Groom: '',                       // 新郎名字
     Bride: '',                       // 新娘名字
     mobile: '',                      // 手机号
-    address: '',                     // 婚礼地址
+    address: null,                   // 婚礼地址
     submitStyle: 'submit_button',
     cover: '',                        // 封面图片url
     latitude: null,                   // 纬度
-    longitude: null                   // 经度
+    longitude: null,                   // 经度
+    banquet_hall: ''                   // 宴会厅
   },
 
   /**
@@ -30,8 +33,10 @@ Page({
     wx.chooseLocation({
       success: function(res){
         console.log(res);
+        var addresss = {name: res.name, address: res.address};
+        console.log(addresss);
         that.setData({
-        address : res.name + res.address,
+        address : addresss,
         latitude: res.latitude,
         longitude: res.longitude
         });
@@ -45,10 +50,11 @@ Page({
   chooseImage: function () {
     var that = this;
     wx.chooseImage({
-      count: 9,
+      count: 1,
       sizeType: ["original", "compressed"],
       sourceType: ["album", "camera"],
       success: function (res) {
+        console.log(res);
         sq.Upload({
           type: 1,
           filePaths: res.tempFilePaths,
@@ -85,6 +91,11 @@ Page({
       address: e.detail.value
     })
   },
+  getbanquet_hall: function (e) {
+    this.setData({
+      banquet_hall: e.detail.value
+    })
+  },
   bindDateChange: function (e) {
     console.log(e.detail.value);
     this.setData({
@@ -96,6 +107,7 @@ Page({
       weddingTime: e.detail.value
     })
   },
+
 
   showToptips(error) {
     const hideToptips = $WxToptips.show({
@@ -110,52 +122,84 @@ Page({
    * 提交
   */
   onSubmit: function (e) {
-    console.log(e);
-        console.log(app.globalData.userInfo.id)
     if (!Validate.checkForm(e)) {
       const error = Validate.errorList[0];
       // console.log(error);
       this.showToptips(error)
       return false;
     }
-
-    sq.POST({
-      url: '/socket/response.do',
-      servername: "logic",
-      params:{
+    controller.REQUEST({
+      servername: constants.CONTANT_SERVER_NAME,
+      methodname: constants.CREATE_INVITATION,
+      data:{
         action_name: "create_invitation",
         data: {
           user_id: app.globalData.userInfo.id,
           bride: e.detail.value.Bride,
           bridegroom: e.detail.value.Groom,
           phone: e.detail.value.mobile,
-          site: e.detail.value.address,
+          site: JSON.stringify(this.data.address),
           wedding_time: this.data.weddingDate +' '+ this.data.weddingTime,
           pic: this.data.cover,
           latitude: this.data.latitude,
-          longitude: this.data.longitude
+          longitude: this.data.longitude,
+          banquet_hall: this.data.banquet_hall
         }
-      },
-      success: function (res) {
-        console.log(res);
-        if(res.wedding_id) {
-          wx.showToast({
-            title: '提交成功',
-            icon: 'success'
-          });
-          wx.redirectTo({
-            url: '../Main/Main?wedding_id='+ res.wedding_id + '&wedding_time=' + res.wedding_time + '&site=' + res.site + '&latitude=' + res.latitude + '&longitude=' + res.longitude,
-          })
-        }
-
       }
     })
+    console.log(this.data.banquet_hall)
+    wx.showLoading({
+      title: '加载中...',
+      duration: 2000,
+      mask: true
+    })
   },
+
+  /**
+   * 提交成功后显示成功信息
+  */
+  showSuccess: function (data) {
+    if(data.code == 0){
+      wx.showToast({
+        title: '提交成功',
+        icon: 'success',
+        duration: 2000
+      });
+      wx.hideLoading();
+      wx.redirectTo({
+        url: '../Main/Main?wedding_id='+ data.data.wedding_id + '&wedding_time=' + data.data.wedding_time + '&site=' + data.data.site + '&latitude=' + data.data.latitude + '&longitude=' + data.data.longitude,
+      })
+    }
+  },
+
+  /**
+   * 获取数据方法
+  */
+  getdata: function (server, method, data) {
+    var that = this;
+    if(typeof server == 'string'){
+      var ProtocolData = JSON.parse(data);
+      switch (method){
+        case constants.CREATE_INVITATION:
+          that.showSuccess(ProtocolData);
+          break;
+      }
+    }
+  },
+
+  /**
+   * 创建页面时初始化请求方法
+  */
+  initPage: function() {
+
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     var that = this;
+    controller.init(this.initPage, this.getdata,);
     //数据进行校验
     const rules = {
       Bride: {

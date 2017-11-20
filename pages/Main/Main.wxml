@@ -1,79 +1,115 @@
 <view class="Mywedding">
-    <view class="Wed_Info" style="height: {{ windowHeight*0.25 }}rpx;">
+    <view class="Wed_Info" style="height: {{ windowHeight*0.16+10}}px;">
+        <view class="avatar_box">
+        <view class="Bride_box">
+        <view class="bride_image"  >
+        <image src="{{bride_avater}}" mode="aspectFill"></image> 
+        </view> 
+        <view class="B_name" style="font-size:22rpx;color: #b66c6d;">{{bride_name}}</view>
+        </view>
+        <view class="groom_box">
+        <view class="groom_image"  >
+        <image src="{{groom_avater}}" mode="aspectFill"></image> 
+        </view>
+        <view class="G_name" style="font-size:22rpx;color: #b66c6d;">{{groom_name}}</view>
+        </view>
+        </view>
       <view class="Info_desc">
-        <view><text style="font-size: 30rpx; color: #4f4f4f">{{ wedding_time }}</text></view>
+        <view style="height: 38rpx;" wx:if="{{wedding_time.day}}"><text style="font-size: 34rpx; color: #333;">{{ wedding_time.day + ' '+ wedding_time.week }}</text></view>
+        <view style="height: 38rpx;" wx:if="{{wedding_time.time}}"><text style="font-size: 34rpx; color: #333;">{{ wedding_time.time }}</text></view>
         <view class="Address" bindtap="toMap">     <!-- 可跳到地图页-->
             <view class="addressImg"> 
-                <image src="../../assets/image/location.png"></image>
+                <image src="http://7xld1x.com1.z0.glb.clouddn.com/location.png"></image>
             </view>
             <view class="">
-                <text style="font-size: 28rpx;color: #333333">{{ site }}</text>
+                <text style="font-size: 26rpx;color: #646464; margin-left: 20rpx;" >{{ site.name }}</text>
+                <view style="font-size: 26rpx;color: #646464; margin-left: 20rpx;" wx:if="{{banquet_hall}}">({{banquet_hall}})</view>
+
+                <!--<text style="font-size: 28rpx; color: #333333">{{site.address}}</text>-->
             </view>
         </view>
       </view>
-      <view class="setUp" bindtap="TosetPage">
-        <image src="../../assets/image/set.png"></image>
+      <view class="setUp" bindtap="TosetPage" wx:if="{{user_role != '5'}}">
+        <image src="http://7xld1x.com1.z0.glb.clouddn.com/tmp/wxb2de1aacb42e47df.o6zAJs6e4iQOHuo7DT2vSURT-cTg.0dd06d0c8b63b78061a19b3bcc51e8e0.png"></image>
+      </view>
+      <view class="setGuest" bindtap="TosetPage" wx:else>
+        <image src="http://7xld1x.com1.z0.glb.clouddn.com/tmp/wxb2de1aacb42e47df.o6zAJs6e4iQOHuo7DT2vSURT-cTg.a04361268093510295f684bd307668ec.png"></image>
       </view>
     </view>
     <view class="Wed_Oper" style="height: {{ windowHeight*0.063}}px;">
         <view class='' style="border-right: 2rpx solid #fff;height: 30rpx;"></view>
         <view class="Operate" bindtap="toCardPage">
-            <image  class="Operate_Card" src="../../assets/image/card.png"></image>
+            <image  class="Operate_Card" src="http://7xld1x.com1.z0.glb.clouddn.com/card.png"></image>
             <text>请帖</text>
         </view>
         <view class='line_com'></view>
         <view class="Operate" bindtap="toPhoto">
-            <image  class="Operate_Pic" src="../../assets/image/pic.png"></image>
+            <image  class="Operate_Pic" src="http://7xld1x.com1.z0.glb.clouddn.com/pic.png"></image>
             <text>相册</text>
         </view>
         <view class='line_com' wx:if="{{ user_role != '5' }}"></view>
         <view class="Operate" wx:if="{{ user_role != '5' }}" bindtap="toGuest">
-            <image  class="Operate_Guests" src="../../assets/image/guests.png"></image>
+            <image  class="Operate_Guests" src="http://7xld1x.com1.z0.glb.clouddn.com/guests.png"></image>
             <text>宾客</text>
         </view>
         <view class='line_com'></view>
         <view class="Operate" bindtap="toBalance">
-            <image  class="Operate_Money" src="../../assets/image/money.png"></image>
+            <image  class="Operate_Money" src="http://7xld1x.com1.z0.glb.clouddn.com/money.png"></image>
             <text>礼金</text>
         </view>
         <view class='' style="border-right: 2rpx solid #fff;height: 30rpx;"></view>
     </view>
     <view class="Wed_Image" style="width:{{ winWidth }}px; height: {{ winHeight }}px;">
-        <view class="lunbo">
+        <view class="lunbo" wx:if="{{!photoIsEmpty}}">
             <view  class="box" bindtouchstart="touchstart" bindtouchmove="touchmove" bindtouchend="touchend">
 
                 <view class="club" animation="{{animation2}}" bindtap="scrollLeft" style="transform: scale(1,1) translateX({{winWidth}}rpx);">
-                <image src="{{clubs[0]}}" mode="aspectFill"/>
+                  <view wx:if="{{clubs[0].type == '1'}}"><image  src="{{clubs[0].url}}" mode="aspectFill"></image></view>
+                  <view wx:elif="{{clubs[0].type == '2'}}">
+                    <image  src="{{clubs[0].url+'?vframe/png/offset/1'}}"></image>
+                  </view>
                 </view>
-                <view class="club" animation="{{animation3}}" data-url="{{clubs[1]}}" bindtap="preview">
-                <image src="{{clubs[1]}}" mode="aspectFill"/>
-                </view>                
+                <view class="club" animation="{{animation3}}" data-url="{{clubs[1].url}}" data-type="{{clubs[1].type}}" bindtap="preview">
+                  <view wx:if="{{clubs[1].type == '1'}}"><image src="{{clubs[1].url}}" mode="aspectFill"></image></view>
+                  <view wx:elif="{{clubs[1].type == '2'}}" class="mask_container">
+                    <image src="{{clubs[1].url+'?vframe/png/offset/1'}}"  hidden="{{Isfullscreen}}"></image>
+                    <view class="mask" wx:if="{{!Isfullscreen}}">
+                      <image src="../../assets/image/play.png"></image>
+                    </view>
+                    <video id="playvideo" src="{{clubs[1].url}}" hidden="{{!Isfullscreen}}" bindfullscreenchange="colseFullscreen" ></video>
+                  </view>
+                </view>           
                 <view class="club" animation="{{animation4}}" bindtap="scrollRight">
-                <image src="{{clubs[2]}}" mode="aspectFill"/>
+                  <view wx:if="{{clubs[2].type == '1'}}"><image src="{{clubs[2].url}}" mode="aspectFill"></image></view>
+                  <view wx:elif="{{clubs[2].type == '2'}}" bindtap="TOPLAY"><image src="{{clubs[2].url+'?vframe/png/offset/1'}}" ></image></view>
                 </view>
             </view>
         </view>
+        <view wx:else class="empty_image">
+          <image src="../../assets/image/photo_empty.png" style="width:206rpx;height:206rpx;"></image>
+          <view class="empty_title">还未添加相册~</view>
+        </view>
         <view class="DANMAKU_Switch" >
-            <view class="chat_image" ><image src="../../assets/image/chat.png" wx:if="{{ isDanmaku }}" bindtap="danmakuInput"></image></view>
-            <view class="dan_image" bindtap="openDan" wx:if="{{ !isDanmaku }}"><image src="../../assets/image/dan_C.png"></image></view>
-            <view class="dan_image" bindtap="openDan" wx:else><image src="../../assets/image/dan_P.png"></image></view>
+            <view class="dan_image" bindtap="openDan" wx:if="{{ !isDanmaku }}"><image src="http://7xld1x.com1.z0.glb.clouddn.com/tmp/wxb2de1aacb42e47df.o6zAJs6e4iQOHuo7DT2vSURT-cTg.969e457eecce29a4dac3e463e85a21db.png"></image></view>
+            <view class="dan_image" bindtap="openDan" wx:else><image src="http://7xld1x.com1.z0.glb.clouddn.com/tmp/wxb2de1aacb42e47df.o6zAJs6e4iQOHuo7DT2vSURT-cTg.c36931c6c0601c06746ea2a769f730a1.png"></image></view>
+            <view class="chat_image" ><image src="http://7xld1x.com1.z0.glb.clouddn.com/tmp/wxb2de1aacb42e47df.o6zAJs6e4iQOHuo7DT2vSURT-cTg.978a5316875f1b45895d71d3faa21f26.png"  wx:if="{{ isDanmaku }}" bindtap="danmakuInput"></image></view>
         </view>
         <!--<view class="DANMAKU_Switch2" wx:if="{{ isDanmaku }}">
             <view class="chat_image" ><image src="../../assets/image/chat.png"></image></view>        
         </view>-->
         <view class="input_box"  wx:if="{{danmaku_input}}"><input confirm-type="send" focus="true" cursor-spacing="10" placeholder="一起聊一聊..."  placeholder-class="boot_input_style" value="{{bind_shootValue}}" bindblur="bind_shoot"  bindconfirm="sendDanmaku" /></view>
     </view>
-    <view class="Wed_button" style="height:{{ windowHeight*0.11}}px;">
-        <view class="btn_to_locale">
-            进入现场
+    <view class="Wed_button" style="height:{{ windowHeight*0.08-10}}px;">
+        <view class="btn_to_locale" bindtap="getDistance">
+            进入婚礼
         </view>        
     </view>
     <!--弹幕-->
     <view class="page" wx:if="{{isDanmaku}}">
-        <view class="doommview" style="{{ windowHeight*0.482}}px; bottom:{{ windowHeight*0.454}}rpx;">
+        <view class="doommview" style="{{ windowHeight*0.482}}px; bottom:{{ windowHeight*0.35}}rpx;">
             <block wx:for="{{doommData}}" wx:key="id">
                 <view wx:if="{{item.display}}" class="aon" style="animation: first {{item.time}}s linear forwards;">
-                    <image src="../../assets/image/touxiang.jpg"></image>{{item.text}}
+                    <image src="{{item.pic}}"></image><view class="aon_text">{{item.text}}</view>
                 </view>
             </block>
         </view>

@@ -1,0 +1,43 @@
+<view class="card_Info">
+    <view class="g_a_b">
+        <view class="INFO">
+            <view class="info_title">新郎姓名</view>
+            <input type="text" name="Groom" style="text-align:right;" id="text" placeholder="请输入新郎名字" placeholder-class="input_font" bindblur="getGroomName"></input>
+        </view>
+        <view class="INFO">
+            <view class="info_title">新娘姓名</view>
+            <input type="text" name="Bride" style="text-align:right;" id="text" placeholder="请输入新娘名字" placeholder-class="input_font" bindblur="getBrideName"></input>
+        </view>
+    </view>
+    <view class="wedding_time">
+        <picker mode = "date" start="2015-09-01" end="2057-12-31" bindchange="bindDateChange">
+          <view class="INFO">
+                <view class="info_title">婚礼日期</view>
+                <view  class="select">
+                  <view class="data">{{weddingDate}}</view>
+                  <image src="http://7xld1x.com1.z0.glb.clouddn.com/next.png"></image>
+                </view>
+          </view>
+        </picker>
+        <picker mode = "time" start="00:00" end="24:59" bindchange="bindTimeChange">
+          <view class="INFO">
+                <view class="info_title">具体时间</view>
+                <view class="select">
+                  <view class="time">{{weddingTime}}</view>
+                  <image src="http://7xld1x.com1.z0.glb.clouddn.com/next.png"></image>
+                </view>
+          </view>
+        </picker>
+    </view>
+    <view class="address" bindtap='getAddr'>
+        <view class="info_title">婚礼地址</view>
+        <view class="select">
+            <view class="location">{{address.name}}</view>
+            <image src="http://7xld1x.com1.z0.glb.clouddn.com/next.png"></image></view>
+    </view>
+</view>
+<canvas canvas-id="myCanvas" />
+<image src="{{imgUrl}}" style="width: {{width}}px;height: {{height}}px;"></image>
+<view class="submit" bindtap="updateImg">
+  保存
+</view>
