@@ -28,7 +28,7 @@ Page({
       imgUrl: '',
       width: null,
       height: null,
-      fontSize: 30,
+      fontSize: 15,
       CanvasText: '',
       TimeImg: '',
       SiteImg: '',
@@ -119,7 +119,7 @@ Page({
       })
       return false;
     }
-    // this.createCard();
+    this.createCard();
     console.log(this.data.BrideImg);
     console.log(this.data.GroomImg);
     console.log(this.data.SiteImg);
@@ -150,7 +150,7 @@ Page({
     wx.canvasToTempFilePath({
       x:0,
       y: that.data.fontSize*0.15,
-      height: that.data.fontSize,
+      height: that.data.fontSize*1.2,
       width: length,
       canvasId: 'myCanvas',
       success: function (res) {
@@ -200,19 +200,26 @@ Page({
     var arr = value.split('');
     for(var i = 0; i < arr.length; i++){
       if (/^[a-zA-Z]$/.test(arr[i])){
-        width = width + that.data.fontSize*0.57;
+        width = width + that.data.fontSize*0.47;
       } else if (/^[0-9]$/.test(arr[i]) ){
         width = width + that.data.fontSize*0.6;
       } else if (/^[\u4E00-\u9FA5]$/.test(arr[i])){
         width = width + that.data.fontSize;
       }
     } 
-    length = 320/UI_WIDTH *that.data.winWidth
+
     if(type == 'groom'){
+      length = 320/UI_WIDTH *that.data.winWidth
       left = 320/UI_WIDTH * that.data.winWidth - width;
-      console.log(left);
     } else if (type == 'bride'){
+      length = 320/UI_WIDTH *that.data.winWidth
       left = 0;
+    } else if(type == 'time'){
+      length = 406/UI_WIDTH * that.data.winWidth
+      left = (length-width)/2
+    } else if(type == 'location'){
+      length = 486/UI_WIDTH * that.data.winWidth;
+      left = (length-width)/2
     }
     ctx.setFontSize(that.data.fontSize);
     ctx.fillText(value, left, that.data.fontSize);

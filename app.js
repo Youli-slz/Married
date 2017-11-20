@@ -49,7 +49,7 @@ App({
   },
 
   onHide: function () {
-    console.log('关闭信道')
+    // console.log('关闭信道')
     this.globalData.ishidden = true;
     // Socket.tunnel.close();
   },

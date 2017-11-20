@@ -51,10 +51,10 @@ Page({
   getInvitationList: function (data) {
     var that = this;
     wx.hideLoading();
-    console.log(data.other_invitation.list)
+    // console.log(data.other_invitation.list)
     for(var i = 0; i< data.other_invitation.count; i++){
       data.other_invitation.list[i].site = JSON.parse(data.other_invitation.list[i].site)
-      console.log(data.other_invitation.list[i].site);
+      // console.log(data.other_invitation.list[i].site);
     }
     that.setData({
       my_invitation: data.my_invitation,
@@ -62,7 +62,7 @@ Page({
       other_count: data.other_invitation.count
     })
     for(var i = 0; i< data.my_invitation.length; i++){
-      console.log('shijain')
+      // console.log('shijain')
       that.countdown(data.my_invitation[i].time, i);
     }
   },
@@ -154,6 +154,7 @@ Page({
 
     getdata: function (server, method,  data) {
      var that = this;
+     console.log('获取到'+ method + '数据')
      if(typeof server == 'string'){
       if(method == constants.GET_INVITATION_LIST){
         that.getInvitationList(JSON.parse(data).data);
@@ -198,7 +199,7 @@ Page({
    */
   onHide: function () {
     for(var i= 0 ; i < this.data.my_invitation.length; i++){
-      console.log(countdown_time)
+      // console.log(countdown_time)
       clearTimeout(countdown_time);
     }
   },

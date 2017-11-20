@@ -150,7 +150,7 @@ Page({
 
   //触摸开始事件
   touchstart: function (e) {
-    // console.log(e.touches[0].pageX);
+    console.log(e.touches[0].pageX);
     this.data.touchDot = e.touches[0].pageX;
     var that = this;
     this.data.interval = setInterval(function () {
@@ -338,7 +338,7 @@ Page({
           that.bind_barrage_data(that.data.dmtext[j].pic, that.data.dmtext[j].text);
           j++;
           that.barrage_achieve();
-        }, 30000)
+        }, 20000)
       } else {
         that.bind_barrage_data(that.data.dmtext[j].pic, that.data.dmtext[j].text);
         j++;
@@ -450,7 +450,7 @@ Page({
   */
   colseFullscreen: function (e) {
     var that = this;
-    // console.log(e.detail.fullScreen);
+    console.log(e.detail.fullScreen);
     if (!e.detail.fullScreen) {
       that.setData({
         Isfullscreen: false
@@ -667,7 +667,7 @@ Page({
   */
   getEnterData: function (data) {
     var that = this;
-    // console.log(data);
+    console.log(data);
     if (data.code == 0) {
       wx.navigateTo({
         url: '../Scene/Scene?chatroomid=' + data.data + '&wedding_id=' + that.data.wedding_id + '&wedding_company=' + that.data.wedding_company
@@ -697,7 +697,7 @@ Page({
     var info = data;
     // console.log(data);
     var TIME = this.convert_Time(info.wedding_time);                 //info.wedding_time.split(" ");
-    console.log(TIME)
+    // console.log(TIME)
     this.setData({
       wedding_time: TIME,
       site: JSON.parse(info.site),
@@ -751,7 +751,7 @@ Page({
   //婚礼回执
   huizhi: function (val) 　{
     var that = this;
-    // console.log('添加回执');
+    console.log('添加回执');
     controller.REQUEST({
       servername: constants.CONTANT_SERVER_NAME,
       methodname: constants.RETURN_RECEIPT,
@@ -783,7 +783,7 @@ Page({
    * 获取请求信道获取的数据
   */
   getdata: function (server, method, data) {
-    console.log('获取到'+ method + '数据');
+    console.log('获取到'+ method + '数据')
     var that = this;
     // if(typeof server == 'string'){
       var ProtocolData = JSON.parse(data).data;

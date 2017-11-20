@@ -22,11 +22,13 @@
     "pages/Main_sonPage/guestPhoto/photo",
     "pages/Main_sonPage/Create_Card/Create",
     "pages/Main_sonPage/AddCardPage/add_card_page",
+    "pages/Card_format/format_one/page_1/page",
     "pages/confirmReflect/confirm",
     "pages/Person/person_set/person_set",
     "pages/test/test",
     "pages/Main_sonPage/SetingCard/setting_card",
-    "pages/Main_sonPage/ImgHtml/img_html"
+    "pages/Main_sonPage/ImgHtml/img_html",
+    "pages/H5/h5_page"
   ],
   "window": {
     "backgroundTextStyle": "light",

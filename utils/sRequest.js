@@ -90,10 +90,11 @@ function setSocketDefault() {
 function websocketRequest( opt = {} ){
     var data;
     const options = Object.assign({}, setSocketDefault(), opt);
-    Socket.tunnel.on('connect', ()=>{console.log('sRequest: 链接')})
-    Socket.tunnel.on('error', (error)=>{console.log('sRequest: '+error)})
-    Socket.tunnel.on('reconnecting', ()=>{console.log('sRequest: reconnecting')})
-    Socket.tunnel.on('reconnect', ()=>{console.log('sRequest: reconnect')})
+    // Socket.tunnel.on('connect', ()=>{console.log('sRequest: 链接')})
+    // Socket.tunnel.on('error', (error)=>{console.log('sRequest: '+error)})
+    // Socket.tunnel.on('reconnecting', ()=>{console.log('sRequest: reconnecting')})
+    // Socket.tunnel.on('reconnect', ()=>{console.log('sRequest: reconnect')})
+    console.log('methodname:' + options.methodname);
     Socket.tunnel.emit('socket',JSON.stringify(options));
     // console.log(JSON.stringify(options));
 }
@@ -250,7 +251,6 @@ function proDefault() {
 
 function checkMethod (opt = {}) {
     const options = Object.assign({}, proDefault(), opt);
-    console.log(options)
     if(options.pro_type == 'wss'){
         websocketRequest(options);
     }else{
