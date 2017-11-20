@@ -890,7 +890,7 @@ Page({
     if(!this.data.isOpenDanmaku) {                                // 判断
         this.barrage_achieve();
         this.setData({
-          isOpenDanmaku: true,
+          isOpenDanmaku: true,  
         })
       } 
 
