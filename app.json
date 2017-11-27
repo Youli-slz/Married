@@ -48,7 +48,7 @@
         "text": "婚礼助手"
       },
       {
-        "pagePath": "pages/test/test",
+        "pagePath": "pages/Person/Person",
         "iconPath": "assets/image/Person_tab.png",
         "selectedIconPath": "assets/image/Person_tab_selected.png",
         "text": "个人中心"
