@@ -1,2 +1,1 @@
-
-<web-view src="{{webSrc}}" class="webpage"></web-view>
+<button bindtap="tapname">关闭信道</button>

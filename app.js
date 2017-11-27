@@ -4,6 +4,7 @@ var qcloud = require('./static/bower_components/wafer-client-sdk/index');
 var constants = require('./static/bower_components/wafer-client-sdk/lib/constants')
 var config = require('./config');
 var SESSION_KEY = 'weapp_session_' + constants.WX_SESSION_MAGIC_ID;
+var sq = require('./utils/sRequest.js');
 
 var Socket = require('./utils/init.js');
 
@@ -51,13 +52,24 @@ App({
   onHide: function () {
     // console.log('关闭信道')
     this.globalData.ishidden = true;
-    // Socket.tunnel.close();
-  },
+    Socket.tunnel.close();
+  },  
   onShow: function ()  {
     this.globalData.ishidden = false;
     // Socket.on('')
     // Socket.CONNECT();
   },
+
+  /**
+   * 是否创建请帖的开关
+  */
+  // isopenclock: function () {
+  //   sq.FunType({
+  //     pro_type: 'https',
+  //     meth_type: 'post',
+  //     url: ''
+  //   })
+  // },
 
   /**
    * 请求获取用户信息， 在获取信息的同时，如果没有登录 会通过login：true 自动登录并获取用户信息

@@ -18,7 +18,7 @@ var CONNECT_CLOSE = 3;
     function connect () {
         console.log('开始连接')
         var tunnel = this.tunnel =  new qcloud.Tunnel(config.service.tunnelUrl);
-        tunnel.on("colse", () => {
+        tunnel.on("close", () => {
             console.log('信道关闭');
             connect_Status = {code: CONNECT_CLOSE, msg: '信道关闭'};
             connectStatus( connect_Status );

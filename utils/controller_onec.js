@@ -17,7 +17,8 @@ var errorMsg={code : '', msg: ''}
     }
 
     function Request ( params ) {
-        if(!socket.Tunnel && isconnect == 0){
+        if((!socket.tunnel && isconnect == 0) || (socket.tunnel.status == 'CLOSED')){
+            console.log('信道关闭或没有信道')
             isconnect = 1;
             socket.CONNECT();
             InitController();

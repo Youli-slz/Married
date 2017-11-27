@@ -7,8 +7,8 @@
     <view class="Card_list" wx:else>
         <block wx:for="{{Card_list}}" wx:key="{{index}}">
             <view class="">
-                <view class="" bindtap="previewCard" data-preview="{{item.preview_link}}"><image src="{{item.cover_pic}}"></image></view>
-                <view class="delete_btn" bindtap="delete_Card" data-index="{{index}}"><image src="http://7xld1x.com1.z0.glb.clouddn.com/del_03.png"></image></view>
+                <view class="" bindtap="previewCard" data-preview="{{item.preview_link}}" data-templateId="{{item.id}}"><image src="{{item.cover_pic}}"></image></view>
+                <view class="delete_btn" bindtap="delete_Card" data-id="{{item.id}}"><image src="http://7xld1x.com1.z0.glb.clouddn.com/del_03.png"></image></view>
             </view>
         </block>
     </view>

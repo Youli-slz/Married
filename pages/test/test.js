@@ -1,33 +1,23 @@
-// pages/test/test.js
+var Socket = require('../../utils/init.js');
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    webSrc:'',   //https://logic.hunlibaoapp.com/wedding/wedding.html?card_id=NzE0Njk4N2ZpcmVfY2xvdWQ&type=app&edit=1
-    pagetype: ''
+  
+  },
+
+  tapname: function () {
+    Socket.tunnel.close();
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options);
-    var linkUrl;
-    if(options.edit){
-      linkUrl=options.preview_link + '?card_id='+ options.card_id + '&edit='+options.edit
-    } else {
-      linkUrl = options.preview_link + '?card_id=' +options.card_id
-    }
-    if(options.groom){
-      linkUrl = options.preview_link + '?card_id=' +options.card_id + '&edit=' + options.edit + '&groom=' + options.groom +'&bride='+ options.bride +'&site=' +options.site +'&time='+ options.time
-      console.log(linkUrl)
-    }
-    this.setData({
-      webSrc: linkUrl,
-      pagetype:　options.pagetype
-    })
+  
   },
 
   /**

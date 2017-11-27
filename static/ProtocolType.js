@@ -25,6 +25,7 @@ module.exports = {
       GET_MY_CARD_TEMPLATE_LIST: 'getMyCardTemplateList',
       GET_CARD_TEMPLATE_LIST: 'getCardTemplateList',
       CREATE_CARD_TEMPLATE: 'createCardTemplate',
+      DELETE_CARD_TEMPLATE: 'delCardTemplate',
 
     IMAGE_SERVER_NAME: 'image',
       GET_PHOTO_LIST: 'getPhotoList',

@@ -21,8 +21,7 @@ Page({
   
     delete_Card:function(e) {
       var that = this;
-      console.log(e);
-      var id = e.currentTarget.dataset.index;
+      var id = e.currentTarget.dataset.id;
   
       wx.showModal({
         title: '提示',
@@ -30,6 +29,16 @@ Page({
         success: function (res) {
           if(res.confirm){
             console.log('删除'+id+'这个请帖');
+            controller.REQUEST({
+              servername: constants.CONTANT_SERVER_NAME,
+              methodname: constants.DELETE_CARD_TEMPLATE,
+              data:{
+                action_name: 'del_card_template',
+                data:{
+                  template_id: parseInt(id)
+                }
+              }
+            })
           }else {
             console.log('取消删除')
           }
@@ -38,10 +47,33 @@ Page({
     },
 
     /**
+     * 获取请求删除请帖返回的数据
+    */
+    getDeleteData: function (data) {
+      var that = this;
+      if(data.code == 0){
+        wx.showToast({
+          title: '删除成功',
+          duration: 1500,
+        })
+        that.getUserCard();
+      }else {
+        wx.showToast({
+          title: data.msg,
+          image: '../../../assets/image/cuo.png',
+          duration: 2000
+        })
+      }
+    },
+
+    /**
      * 点击预览
      */
     previewCard: function (e) {
-      console.log(e.currentTarget.dataset.preview)
+      console.log(e.currentTarget.dataset.templateid);
+      wx.navigateTo({
+        url: '../../ToCard/tocard?templateId=' + e.currentTarget.dataset.templateid + '&type=2'+ '&edit=1' + '&userId=' + app.globalData.userInfo.id + '&weddingId=' + this.data.Card_Id
+      })
     },
 
     /**
@@ -96,6 +128,9 @@ Page({
           case constants.GET_MY_CARD_TEMPLATE_LIST:
             that.getMyCardList(ProtocolData);
             break;
+          case constants.DELETE_CARD_TEMPLATE:
+            that.getDeleteData(ProtocolData);
+            break;
         }
       }
     },
@@ -104,6 +139,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+      console.log('请帖id   '+ options.wedding_id)
       controller.init(this.initPage, this.getdata, );
       this.setData({
         Card_Id: options.wedding_id,

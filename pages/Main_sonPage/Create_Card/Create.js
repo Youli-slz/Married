@@ -10,16 +10,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    Card_list: [
-      // 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1509169076079&di=4b396d5f8bcf34efc7ed692785b69550&imgtype=0&src=http%3A%2F%2Fpic2.ooopic.com%2F11%2F48%2F78%2F54b1OOOPIC54.jpg',
-      // 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1509169076079&di=4b396d5f8bcf34efc7ed692785b69550&imgtype=0&src=http%3A%2F%2Fpic2.ooopic.com%2F11%2F48%2F78%2F54b1OOOPIC54.jpg',
-      // 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1509169076079&di=4b396d5f8bcf34efc7ed692785b69550&imgtype=0&src=http%3A%2F%2Fpic2.ooopic.com%2F11%2F48%2F78%2F54b1OOOPIC54.jpg',
-      // 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1509169076079&di=4b396d5f8bcf34efc7ed692785b69550&imgtype=0&src=http%3A%2F%2Fpic2.ooopic.com%2F11%2F48%2F78%2F54b1OOOPIC54.jpg',
-      // 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1509169076079&di=4b396d5f8bcf34efc7ed692785b69550&imgtype=0&src=http%3A%2F%2Fpic2.ooopic.com%2F11%2F48%2F78%2F54b1OOOPIC54.jpg',
-      // 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1509169076079&di=4b396d5f8bcf34efc7ed692785b69550&imgtype=0&src=http%3A%2F%2Fpic2.ooopic.com%2F11%2F48%2F78%2F54b1OOOPIC54.jpg',
-      // 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1509169076079&di=4b396d5f8bcf34efc7ed692785b69550&imgtype=0&src=http%3A%2F%2Fpic2.ooopic.com%2F11%2F48%2F78%2F54b1OOOPIC54.jpg',
-      // 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1509169076079&di=4b396d5f8bcf34efc7ed692785b69550&imgtype=0&src=http%3A%2F%2Fpic2.ooopic.com%2F11%2F48%2F78%2F54b1OOOPIC54.jpg',
-    ],
+    card_type_list: [],
+    Card_list: [],
     CardListData: [],
     currentTab:0,
     winWidth: 0,
@@ -82,6 +74,9 @@ Page({
     console.log(data);
     if(data.code == 0){
       console.log(data.data);
+      this.setData({
+        card_type_list: data.data,
+      })
     } else {
       console.log(data.msg);
     }
@@ -145,24 +140,18 @@ Page({
    * 选择操作
   */
   make_card: function (e) {
-    console.log(e);
-    var linkUrl;
     var that = this;
     var card_id = e.currentTarget.dataset.id;
     if(that.data.methodType[e.detail.value].name == '预览'){
       console.log('预览')
       console.log(e.currentTarget.dataset.link);
       wx.navigateTo({
-        url: '../../test/test?card_id='+ card_id +'&preview_link=' + e.currentTarget.dataset.link 
+        url: '../../ToCard/tocard?templateId='+ card_id +'&type=1' 
       })
     } else {
       console.log('创建')
-      // that.createCard(e.currentTarget.dataset.id);
-      // linkUrl = e.currentTarget.dataset.link + '&edit=1'+'&link='+ e.currentTarget.dataset.link;
-      console.log(e.currentTarget.dataset.link);
-      wx.navigateTo({
-        //url: '../../test/test?card_id='+ card_id + '&edit=1' +'&preview_link=' + e.currentTarget.dataset.link 
-        url:'../SetingCard/setting_card?card_id='+card_id + '&wedding_id=' + parseInt(that.data.wedding_id) + '&preview_link=' + e.currentTarget.dataset.link
+      wx.navigateTo({ 
+        url:'../SetingCard/setting_card?card_id='+card_id + '&wedding_id=' + parseInt(that.data.wedding_id)
       })
     }
 
@@ -237,6 +226,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log('请帖id   '+ options.wedding_id)
     var that = this;
     that.getCardType();
     that.getrecommendList();

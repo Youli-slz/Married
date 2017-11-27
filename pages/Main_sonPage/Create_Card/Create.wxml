@@ -13,6 +13,7 @@
 </view>-->
 
 <view class="swiper-tab"> 
+<block wx:for="{{card_type_list}}" wx:key="{{index}}"></block>
   <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">推荐</view> 
   <!--<view class="line_top"></view>
   <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">清新风</view> 

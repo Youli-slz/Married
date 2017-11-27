@@ -202,7 +202,7 @@ Page({
                   uploadImg: val.tempFilePath,
                 })
                 wx.navigateTo({
-                  url: '../../test/test?img='+ val.tempFilePath + '&imgId='+ _this.imgId + '&seating=' + _this.seating
+                  url: '../../ToCard/tocard?img='+ val.tempFilePath + '&imgId='+ _this.imgId + '&seating=' + _this.seating
                 })
               }
             })

@@ -8,6 +8,7 @@ var picwidth = 0;
 var length;
 var UI_WIDTH = 750;
 var UI_HEIGHT = 1120;
+var imgStr = '';
 
 
 Page({
@@ -28,7 +29,7 @@ Page({
       imgUrl: '',
       width: null,
       height: null,
-      fontSize: 15,
+      fontSize: 30,
       CanvasText: '',
       TimeImg: '',
       SiteImg: '',
@@ -36,7 +37,8 @@ Page({
       card_id: null,
       link: '',
       winWidth: null,
-      winHeight: null
+      winHeight: null,
+      ImgObject: []
       
   },
 
@@ -51,7 +53,6 @@ Page({
           longitde: res.longitude
         });
         that.canvass('site', address.name)
-        // that.getimg('site', address.name);
       }　
     })
   },
@@ -61,7 +62,6 @@ Page({
       Bride: e.detail.value,
     })
     this.canvass('bride', e.detail.value)
-    // this.getimg('bride', e.detail.value)
   },
 
   getGroomName: function (e) {
@@ -69,7 +69,6 @@ Page({
       Groom: e.detail.value,
     })
     this.canvass('groom', e.detail.value)
-    // this.getimg('groom', e.detail.value)
   },
 
   bindDateChange: function (e) {
@@ -77,7 +76,6 @@ Page({
     if(this.data.weddingTime){
       TimeFull = this.format(e.detail.value) + this.format(this.data.weddingTime);
       this.canvass('time',TimeFull);
-      // this.getimg('time', TimeFull)
     }
     this.setData({
       weddingDate: e.detail.value,
@@ -119,32 +117,17 @@ Page({
       })
       return false;
     }
+    var imgList = new Object();
+    imgList.bride = this.data.BrideImg;
+    imgList.groom = this.data.GroomImg;
+    imgList.SiteImg = this.data.SiteImg;
+    imgList.TimeImg = this.data.TimeImg;
+    imgStr = JSON.stringify(imgList);
     this.createCard();
-    console.log(this.data.BrideImg);
-    console.log(this.data.GroomImg);
-    console.log(this.data.SiteImg);
-    console.log(this.data.TimeImg);
-    console.log(this.data.card_id);
-    console.log(this.data.link)
-
-    wx.redirectTo({
-      url: '../../test/test?card_id='+ this.data.card_id + '&edit=1'+'&bride='+ this.data.BrideImg+'&groom='+ this.data.GroomImg+'&site='+ this.data.SiteImg+'&time='+ this.data.TimeImg+'&preview_link=' + this.data.link,
-
-    })
-    // var pages = getCurrentPages();
-    // var currPage = pages[pages.length - 1];
-    // var prevPage = pages[pages.length - 2];
-    // prevPage.setData({
-    //   webSrc: 'https://logic.hunlibaoapp.com/wedding/wedding.html?card_id=NzE0Njk4N2ZpcmVfY2xvdWQ&with_myb=1&type=app&edit=1&message=helloworld'
-    // })
-
-    // wx.switchTab({
-    //   url: '../../test/test'
-    // })
   },
 
   //获取裁剪成图片的文字
-  getimg: function (type , value) {
+  getimg: function (type, value) {
     var that = this; 
 
     wx.canvasToTempFilePath({
@@ -161,6 +144,7 @@ Page({
           success: function (val) {
             console.log(val.imageURL)
             if(type == 'bride'){
+              that.data.ImgObject.push
               that.setData({
                 BrideImg: val.imageURL,
                 // width: width,
@@ -185,7 +169,7 @@ Page({
                 // height: that.data.fontSize
               })
             } 
-            console.log('type:' +val.imageURL);
+            console.log( type +val.imageURL);
           }
         })
       }
@@ -197,6 +181,11 @@ Page({
     var that = this;
     var width = 0;
     var left = 0;
+    if(type == 'time' || type == 'location'){
+      this.data.fontSize = 15;
+    } else {
+      this.data.fontSize = 30;
+    }
     var arr = value.split('');
     for(var i = 0; i < arr.length; i++){
       if (/^[a-zA-Z]$/.test(arr[i])){
@@ -251,7 +240,16 @@ Page({
   */
   getCreateData: function (data){
     if(data.code == 0){
-      console.log(data.data);
+      console.log(data.data.template_id);
+      wx.redirectTo({
+        url: '../../ToCard/tocard?templateId='+ data.data.template_id + '&type=2'+ '&edit=1'+ '&userId=' +this.data.user_id + '&weddingId=' + this.data.wedding_id + '&imgStr=' + imgStr,
+        success:function (res) {
+          console.log(res);
+        },
+        fail: function (err) {
+          console.log(err);
+        }
+      })
     }else {
       wx.showToast({
         title: data.msg,
@@ -261,8 +259,86 @@ Page({
     }
   },
 
+  /**
+   * 获取婚礼信息请求
+  */
+  getweddingInfo: function (weddingId) {
+    var that = this;
+    controller.REQUEST({
+      servername: constants.CONTANT_SERVER_NAME,
+      methodname: constants.GET_INVITATION,
+      data: {
+        action_name: 'get_invitation',
+        data:{
+          card_id: weddingId,
+        }
+      }
+    })
+  },
+
+  /**
+   * 获取到婚礼的信息
+  */
+  getWeddingData: function (data) {
+    var that = this;
+    var Data = [];
+    var info = data.data;
+    if(data.code == 0){
+      var TIME = that.convert_Time(info.wedding_time);
+      var fulltime = that.format(TIME.day) + that.format(TIME.time);
+      info.site = JSON.parse(info.site);
+      that.setData({
+        Groom: info.bridegroom,
+        Bride: info.bride,
+        weddingDate: TIME.day,
+        weddingTime: TIME.time,
+        address: info.site
+      })
+      Data.push({type: 'groom', value: info.bridegroom});
+      Data.push({type: 'bride', value: info.bride});
+      Data.push({type: 'time', value: fulltime});
+      Data.push({type: 'location', value: info.site.name})
+      console.log(Data)
+        // that.canvass(Data[i])
+        var count = 0;
+        var te = setInterval(function () {
+          if(count < 4){
+           that.canvass(Data[count].type, Data[count].value);
+           count ++;
+          } else {
+            clearInterval(te);
+            console.log('关闭定时器')
+          }
+
+        },200);
+    }
+  },
+
+  convert_Time: function (t) {
+    var obj = {day: '', time: ''};
+    var date = new Date(t*1000);
+    var year = date.getFullYear();
+    var month = this.addZero(date.getMonth()+ 1);
+    var day = this.addZero(date.getDate());
+    var hour = this.addZero(date.getHours());
+    var minute = this.addZero(date.getMinutes());
+
+    obj.day = year + '-' + month + '-' + day;
+    obj.time = hour + ':' + minute;
+
+    return obj;
+  },
+
+  addZero: function (temp){
+    if(temp < 10)
+      return '0'+temp;
+    else 
+      return temp;
+  },
+
   initPage: function () {
     this.createCard();
+    this.getweddingInfo();
   },
 
   getdata: function (server, method, data) {
@@ -273,6 +349,9 @@ Page({
         case constants.CREATE_CARD_TEMPLATE:
           that.getCreateData(ProtocolData);
           break;
+        case constants.GET_INVITATION:
+          that.getWeddingData(ProtocolData);
+          break;
       }
     }
   },
@@ -281,16 +360,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log('请帖id   '+ options.wedding_id)
     var that = this;
     controller.init(that.initPage, that.getdata,)
-    
+    that.getweddingInfo(options.card_id);
     ctx=wx.createCanvasContext('myCanvas');
     console.log(options);
     this.setData({
       wedding_id: options.wedding_id,
       user_id: app.globalData.userInfo.id,
       card_id: options.card_id,
-      link: options.preview_link
     })
     wx.getSystemInfo({
       success: function (res) {
@@ -313,7 +392,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
   },
 
   /**

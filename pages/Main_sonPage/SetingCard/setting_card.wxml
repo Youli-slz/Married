@@ -2,11 +2,11 @@
     <view class="g_a_b">
         <view class="INFO">
             <view class="info_title">新郎姓名</view>
-            <input type="text" name="Groom" style="text-align:right;" id="text" placeholder="请输入新郎名字" placeholder-class="input_font" bindblur="getGroomName"></input>
+            <input type="text" name="Groom" style="text-align:right;" value="{{Groom}}" id="text" placeholder="请输入新郎名字" placeholder-class="input_font" bindblur="getGroomName"></input>
         </view>
         <view class="INFO">
             <view class="info_title">新娘姓名</view>
-            <input type="text" name="Bride" style="text-align:right;" id="text" placeholder="请输入新娘名字" placeholder-class="input_font" bindblur="getBrideName"></input>
+            <input type="text" name="Bride" style="text-align:right;" id="text" value="{{Bride}}" placeholder="请输入新娘名字" placeholder-class="input_font" bindblur="getBrideName"></input>
         </view>
     </view>
     <view class="wedding_time">
