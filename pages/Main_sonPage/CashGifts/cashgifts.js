@@ -12,7 +12,7 @@ Page({
    */
   data: {
     wish: '新婚快乐',
-    Card_id: null,
+    Card_Id: null,
     winWidth: null,
     winHeight: null,
     CASH: "0.00",
@@ -142,7 +142,7 @@ Page({
   */
   sendCash: function () {
     var that = this;
-    console.log(this.data.Balance);
+    console.log(that.data.Card_Id);
     if(!readyPay){
       controller.REQUEST({
         servername: constants.CONTANT_SERVER_NAME,
@@ -153,8 +153,8 @@ Page({
             user_id: app.globalData.userInfo.id,
             pay_type: 1,                                  // 支付类型固定为1
             pay_target: 'cashGift',
-            data:{
-              card_id: that.data.Card_id,
+            params:{
+              card_id: parseInt(that.data.Card_Id),
               money: that.data.CASH,
               wish: that.data.wish
             }
@@ -370,6 +370,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options);
     this.setData({
       Card_Id: options.wedding_id,
     })

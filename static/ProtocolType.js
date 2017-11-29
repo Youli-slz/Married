@@ -17,7 +17,7 @@ module.exports = {
       CANCEL_PAY: 'cancel_pay',
       GET_GUEST_BACK: 'getGuestBack',
       UPDATE_GUEST_INFO:'updateGuestInfo',
-      SEND_CASHGIFT: 'SENDcASHgIFT',
+      SEND_CASHGIFT: 'sendCashGift',
       GET_CASHGIFT_LIST:'getCashGiftList',
       SEND_CASHGIFT_LIST: 'sendCashGiftList',
       UPDATE_USER_INFO: 'updateUserInfo',

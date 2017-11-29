@@ -1,8 +1,10 @@
 var constants = require('../../../static/ProtocolType.js');
 var controller = require('../../../utils/controller_onec.js');
-var currentPage = 1;
-var current_template=1;
+var currentPage = 1;       // 当前页面
+var current_template=1;    // 分页获取模版的偏移量
+var isChangePage = false;
 var app = getApp();
+
 
 Page({
 
@@ -43,10 +45,14 @@ Page({
   swichNav: function (e) {
     var that = this;
     currentPage = parseInt(e.target.dataset.current) + 1 ;
+    current_template = 1;                                          // 切换页面初始化获取更多模版的计数初始化
     if(this.data.currentTab === e.target.dataset.current) {
       return false;
     } else {
+      isChangePage = true;
+      that.getrecommendList();
       that.setData({
+        Card_list: [],
         currentTab: e.target.dataset.current,
       })
     }
@@ -95,7 +101,7 @@ Page({
         data:{
           page_no: current_template,
           page_size: 20,
-          group_id: 1
+          group_id: currentPage
         }
       }
     })
@@ -109,14 +115,17 @@ Page({
     if(data.code == 0){
       console.log(data.data)
       if(data.data.length){
+        console.log(isChangePage);
         for(var i = 0; i< data.data.length; i++){
           that.data.Card_list.push(data.data[i]);
         }
       }
+      console.log(that.data.Card_list);
       that.setData({
         CardListData: data.data,
         Card_list: that.data.Card_list
       })
+      isChangePage = false;
     } else {
       wx.showToast({
         title: data.msg,
@@ -124,13 +133,14 @@ Page({
         duration: 2000
       })
     }
+    console.log(isChangePage);
   },
 
   /**
    * 下拉到底部获取新的数据
   */
   lower: function () {
-    if(this.data.CardListData.length >= 20){
+    if(this.data.CardListData.length >= 20 && this.data.CardListData.length%20 == 0){
       current_template++;
       this.getrecommendList();
     }
