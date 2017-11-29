@@ -33,10 +33,18 @@ Page({
   */
   bindChange: function (e) {
     var that = this;
-    currentPage = parseInt(e.detail.current) + 1;
-    that.setData({
-      currentTab: e.detail.current
-    })
+    currentPage = parseInt(e.target.dataset.current) + 1 ;
+    current_template = 1;                                          // 切换页面初始化获取更多模版的计数初始化
+    if(this.data.currentTab === e.target.dataset.current) {
+      return false;
+    } else {
+      isChangePage = true;
+      that.getrecommendList();
+      that.setData({
+        Card_list: [],
+        currentTab: e.target.dataset.current,
+      })
+    }
   },
 
   /**
@@ -81,7 +89,7 @@ Page({
     if(data.code == 0){
       console.log(data.data);
       this.setData({
-        card_type_list: data.data,
+        card_type_list: ['推荐'],
       })
     } else {
       console.log(data.msg);
